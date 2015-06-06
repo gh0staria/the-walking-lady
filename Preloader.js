@@ -15,6 +15,14 @@ BasicGame.Preloader.prototype = {
 		//this.load.setPreloadSprite(this.preloadBar);
 
 		//	Here we load the rest of the assets our game needs.
+		this.load.spritesheet('lady', 'imgs/lady.png', 20, 31);
+		this.load.image('floor', 'imgs/floor.png');
+
+		this.load.image('potion', 'imgs/potion.png');
+		this.load.image('cheese', 'imgs/cheese.png');
+		this.load.image('bread', 'imgs/bread.png');
+		this.load.image('coin', 'imgs/coin.png');
+		this.load.image('gem', 'imgs/gem.png');
 	},
 
 	create: function () {
@@ -22,6 +30,7 @@ BasicGame.Preloader.prototype = {
 		//this.preloadBar.cropEnabled = false;
 		
 		this.state.start('MainMenu');
+		console.log('start main menu state');
 	}/*,
 
 	update: function () {
