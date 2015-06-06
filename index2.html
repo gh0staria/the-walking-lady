@@ -8,6 +8,7 @@
 		<script src="Preloader.js"></script>
 		<script src="MainMenu.js"></script>
 		<script src="Game.js"></script>
+		<script src="GameOverScreen.js"></script>
 	</head>
 	<body>
 		<div id="gameContainer"></div>
@@ -18,10 +19,11 @@
 				var game = new Phaser.Game(400, 500, Phaser.AUTO, 'gameContainer');
 
 				//	Add the States your game has.
-				game.state.add('Boot', BasicGame.Boot);
-				game.state.add('Preloader', BasicGame.Preloader);
-				game.state.add('MainMenu', BasicGame.MainMenu);
-				game.state.add('Game', BasicGame.Game);
+				game.state.add('Boot', TheWalkingLady.Boot);
+				game.state.add('Preloader', TheWalkingLady.Preloader);
+				game.state.add('MainMenu', TheWalkingLady.MainMenu);
+				game.state.add('Game', TheWalkingLady.Game);
+				game.state.add('GameOverScreen', TheWalkingLady.GameOverScreen);
 
 				//	Now start the Boot state.
 				game.state.start('Boot');

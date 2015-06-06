@@ -1,11 +1,11 @@
 
-BasicGame.Preloader = function (game) {
+TheWalkingLady.Preloader = function (game) {
 
 	this.ready = false;
 
 };
 
-BasicGame.Preloader.prototype = {
+TheWalkingLady.Preloader.prototype = {
 
 	preload: function () {
 		//	These are the assets we loaded in Boot.js
@@ -30,6 +30,10 @@ BasicGame.Preloader.prototype = {
 		this.load.image('playBtn', 'assets/placeholder_play_button.png');
 		this.load.image('helpBtn', 'assets/placeholder_help_button.png');
 		this.load.image('aboutBtn', 'assets/placeholder_about_button.png');
+		this.load.image('quitBtn', 'assets/placeholder_quit_button.png');
+		this.load.image('restartBtn', 'assets/placeholder_restart_button.png');
+		this.load.image('resumeBtn', 'assets/placeholder_resume_button.png');
+		this.load.image('gotoMenuBtn', 'assets/placeholder_goto_menu_button.png');
 	},
 
 	create: function () {

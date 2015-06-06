@@ -1,5 +1,5 @@
 
-BasicGame.Game = function (game) {};
+TheWalkingLady.Game = function (game) {};
 
 var score = 0;
 var scoreText;
@@ -27,17 +27,11 @@ function createFaller() {
 }
 
 function gameOver() {
-	//game over text
-	var gameOverText = this.add.text(this.world.centerX, 200, 'GAME OVER', {fontSize: '36px', fill: '#000'});
-	gameOverText.anchor.set(0.5);
-
-	var replay = this.add.text(this.world.centerX, 225, 'refresh page to replay', {fontSize: '16px', fill: '#000'});
-	replay.anchor.set(0.5);
-	//pause game
-	this.game.paused = true;
+	this.state.start('GameOverScreen');
+	console.log('start game over screen state');
 }
 
-BasicGame.Game.prototype = {
+TheWalkingLady.Game.prototype = {
 	create: function () {
 		this.stage.backgroundColor = '#ffedb7';
 		this.physics.startSystem(Phaser.Physics.ARCADE);

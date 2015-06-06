@@ -1,10 +1,10 @@
-var BasicGame = {};
+var TheWalkingLady = {};
 
-BasicGame.Boot = function (game) {
+TheWalkingLady.Boot = function (game) {
 
 };
 
-BasicGame.Boot.prototype = {
+TheWalkingLady.Boot.prototype = {
     init: function () {
         //  Unless you specifically know your game needs to support multi-touch I would recommend setting this to 1
         this.input.maxPointers = 1;

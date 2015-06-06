@@ -1,5 +1,4 @@
-
-BasicGame.MainMenu = function (game) {};
+TheWalkingLady.MainMenu = function (game) {};
 
 var menuTitle;
 var play;
@@ -19,7 +18,7 @@ function goToAbout() {
 	console.log('I haven\'t added an about page yet!');
 }
 
-BasicGame.MainMenu.prototype = {
+TheWalkingLady.MainMenu.prototype = {
 
 	create: function () {
 		this.stage.backgroundColor = '#ffedb7';
