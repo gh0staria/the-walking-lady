@@ -72,7 +72,8 @@ BasicGame.Game.prototype = {
 		floor.body.immovable = true;
 
 		//add + setup lady
-		lady = this.add.sprite(32, this.world.height - 94, 'lady');
+		lady = this.add.sprite(this.world.width / 2, this.world.height - 94, 'lady');
+		lady.anchor.set(0.5);
 		lady.scale.setTo(2, 2);
 		lady.smoothed = false;
 		//lady physics
