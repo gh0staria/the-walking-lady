@@ -6,6 +6,61 @@ var scoreText;
 var spawnTimer;
 var faller;
 
+function collectItem(lady, item) {
+	item.kill();
+	score += 10;
+	scoreText.text = 'Score: ' + score;
+}
+
+function createFaller() {
+	var itemsArray = ['potion', 'cheese', 'bread', 'coin', 'gem'];
+	//add cheese
+	faller = this.add.sprite(this.world.randomX, -100, itemsArray[Math.floor(Math.random() * 5)]);
+	faller.anchor.set(0.5);
+	//cheese physics
+	this.physics.enable(faller, Phaser.Physics.ARCADE);
+	items.add(faller);
+	setGrav();
+}
+
+function gameOver() {
+	//game over text
+	var gameOverText = this.add.text(this.world.centerX, 200, 'GAME OVER', {fontSize: '36px', fill: '#000'});
+	gameOverText.anchor.set(0.5);
+
+	var replay = this.add.text(this.world.centerX, 225, 'refresh page to replay', {fontSize: '16px', fill: '#000'});
+	replay.anchor.set(0.5);
+	//pause game
+	this.game.paused = true;
+}
+
+function setGrav() {
+	if (score >= 0 && score <= 99) {
+		faller.body.gravity.y = 100;
+	}
+	if (score >= 100 && score <= 199) {
+		faller.body.gravity.y = 150;
+	}
+	if (score >= 200 && score <= 299) {
+		faller.body.gravity.y = 200;
+	}
+	if (score >= 300 && score <= 399) {
+		faller.body.gravity.y = 250;
+	}
+	if (score >= 400 && score <= 499) {
+		faller.body.gravity.y = 300;
+	}
+	if (score >= 500 && score <= 599) {
+		faller.body.gravity.y = 350;
+	}
+	if (score >= 600 && score <= 250) {
+		faller.body.gravity.y = 400;
+	}
+	if (score >= 700) {
+		faller.body.gravity.y = 450;
+	}
+}
+
 BasicGame.Game.prototype = {
 	create: function () {
 		this.stage.backgroundColor = '#ffedb7';
@@ -62,57 +117,3 @@ BasicGame.Game.prototype = {
 		this.physics.arcade.collide(faller, floor);
     }
 };
-function collectItem(lady, item) {
-	item.kill();
-	score += 10;
-	scoreText.text = 'Score: ' + score;
-}
-
-function createFaller() {
-	var itemsArray = ['potion', 'cheese', 'bread', 'coin', 'gem'];
-	//add cheese
-	faller = this.add.sprite(this.world.randomX, -100, itemsArray[Math.floor(Math.random() * 5)]);
-	faller.anchor.set(0.5);
-	//cheese physics
-	this.physics.enable(faller, Phaser.Physics.ARCADE);
-	items.add(faller);
-	setGrav();
-}
-
-function gameOver () {
-	//game over text
-	var gameOverText = this.add.text(this.world.centerX, 200, 'GAME OVER', {fontSize: '36px', fill: '#000'});
-	gameOverText.anchor.set(0.5);
-
-	var replay = this.add.text(this.world.centerX, 225, 'refresh page to replay', {fontSize: '16px', fill: '#000'});
-	replay.anchor.set(0.5);
-	//pause game
-	this.game.paused = true;
-}
-
-function setGrav() {
-	if (score >= 0 && score <= 99) {
-		faller.body.gravity.y = 100;
-	}
-	if (score >= 100 && score <= 199) {
-		faller.body.gravity.y = 150;
-	}
-	if (score >= 200 && score <= 299) {
-		faller.body.gravity.y = 200;
-	}
-	if (score >= 300 && score <= 399) {
-		faller.body.gravity.y = 250;
-	}
-	if (score >= 400 && score <= 499) {
-		faller.body.gravity.y = 300;
-	}
-	if (score >= 500 && score <= 599) {
-		faller.body.gravity.y = 350;
-	}
-	if (score >= 600 && score <= 250) {
-		faller.body.gravity.y = 400;
-	}
-	if (score >= 700) {
-		faller.body.gravity.y = 450;
-	}
-}
