@@ -14,7 +14,7 @@ BasicGame.Boot.prototype = {
     },
     preload: function () {
         //  Here we load the assets required for our preloader.
-		// I currently have no preloader assets.
+		this.load.image('preloaderBar', 'assets/placeholder_loading_bar.png');
     },
     create: function () {
         //  By this point the preloader assets have loaded to the cache, we've set the game settings

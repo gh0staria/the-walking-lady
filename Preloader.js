@@ -9,10 +9,10 @@ BasicGame.Preloader.prototype = {
 
 	preload: function () {
 		//	These are the assets we loaded in Boot.js
-		//  Once again I don't have any preloader stuff right now.
+		this.preloadBar = this.add.sprite(100, 100, 'preloaderBar');
 
 		//	This sets the preloadBar sprite as a loader sprite.
-		//this.load.setPreloadSprite(this.preloadBar);
+		this.load.setPreloadSprite(this.preloadBar);
 
 		//	Load basics
 		this.load.spritesheet('lady', 'assets/lady.png', 20, 31);
