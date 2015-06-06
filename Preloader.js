@@ -14,15 +14,22 @@ BasicGame.Preloader.prototype = {
 		//	This sets the preloadBar sprite as a loader sprite.
 		//this.load.setPreloadSprite(this.preloadBar);
 
-		//	Here we load the rest of the assets our game needs.
-		this.load.spritesheet('lady', 'imgs/lady.png', 20, 31);
-		this.load.image('floor', 'imgs/floor.png');
-
-		this.load.image('potion', 'imgs/potion.png');
-		this.load.image('cheese', 'imgs/cheese.png');
-		this.load.image('bread', 'imgs/bread.png');
-		this.load.image('coin', 'imgs/coin.png');
-		this.load.image('gem', 'imgs/gem.png');
+		//	Load basics
+		this.load.spritesheet('lady', 'assets/lady.png', 20, 31);
+		this.load.image('floor', 'assets/floor.png');
+		
+		//  Load items
+		this.load.image('potion', 'assets/potion.png');
+		this.load.image('cheese', 'assets/cheese.png');
+		this.load.image('bread', 'assets/bread.png');
+		this.load.image('coin', 'assets/coin.png');
+		this.load.image('gem', 'assets/gem.png');
+		
+		// Load menu stuff
+		this.load.image('gameTitle', 'assets/placeholder_game_title.png');
+		this.load.image('playBtn', 'assets/placeholder_play_button.png');
+		this.load.image('helpBtn', 'assets/placeholder_help_button.png');
+		this.load.image('aboutBtn', 'assets/placeholder_about_button.png');
 	},
 
 	create: function () {
