@@ -17,6 +17,8 @@ TheWalkingLady.GameOverScreen.prototype = {
 		var quitButton = this.add.sprite(100, 360, 'quitBtn');
 		quitButton.inputEnabled = true;
 		quitButton.events.onInputDown.add(function() {
+			score = 0;
+			addedGrav = 0;
 			this.state.start('MainMenu');
 		}, this);
 		
