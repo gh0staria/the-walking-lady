@@ -8,6 +8,7 @@ TheWalkingLady.GameOverScreen.prototype = {
 		var restartButton = this.add.sprite(100, 250, 'restartBtn');
 		restartButton.inputEnabled = true;
 		restartButton.events.onInputDown.add(function() {
+			score = 0;
 			this.state.start('Game');
 		}, this);
 		
