@@ -34,6 +34,7 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('restartBtn', 'assets/placeholder_restart_button.png');
 		this.load.image('resumeBtn', 'assets/placeholder_resume_button.png');
 		this.load.image('gotoMenuBtn', 'assets/placeholder_goto_menu_button.png');
+		this.load.image('pauseBtn', 'assets/placeholder_pause_button.png');
 	},
 
 	create: function () {

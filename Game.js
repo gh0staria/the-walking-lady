@@ -31,6 +31,11 @@ function gameOver() {
 	console.log('start game over screen state');
 }
 
+function pauseGame() {
+	console.log('game paused');
+	this.game.paused = true;
+}
+
 TheWalkingLady.Game.prototype = {
 	create: function () {
 		this.stage.backgroundColor = '#ffedb7';
@@ -62,7 +67,12 @@ TheWalkingLady.Game.prototype = {
 		scoreText = this.add.text(8, 8, 'Score: 0', {fontSize: '14px', fill: '#000'});
 		//timer
 		this.time.events.repeat(Phaser.Timer.SECOND * 2, 1000, createFaller, this);
-    },
+		
+		//  Add pause button
+		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
+		pauseButton.inputEnabled = true;
+		pauseButton.events.onInputUp.add(pauseGame, this);
+	},
 	
 	update: function () {
         cursors = this.input.keyboard.createCursorKeys();
