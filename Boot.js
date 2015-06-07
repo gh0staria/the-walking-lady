@@ -14,7 +14,7 @@ TheWalkingLady.Boot.prototype = {
     },
     preload: function () {
         //  Here we load the assets required for our preloader.
-		this.load.image('preloaderBar', 'assets/placeholder_loading_bar.png');
+		this.load.image('preloaderBar', 'assets/buttons/placeholder_loading_bar.png');
     },
     create: function () {
         //  By this point the preloader assets have loaded to the cache, we've set the game settings
