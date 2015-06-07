@@ -11,11 +11,13 @@ function startGame() {
 }
 
 function goToHelp() {
-	console.log('I haven\'t added a help page yet!');
+	this.state.start('Help');
+	console.log('help state start');
 }
 
 function goToAbout() {
-	console.log('I haven\'t added an about page yet!');
+	this.state.start('About');
+	console.log('about state start');
 }
 
 TheWalkingLady.MainMenu.prototype = {

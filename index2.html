@@ -9,6 +9,8 @@
 		<script src="MainMenu.js"></script>
 		<script src="Game.js"></script>
 		<script src="GameOverScreen.js"></script>
+		<script src="help.js"></script>
+		<script src="about.js"></script>
 	</head>
 	<body>
 		<div id="gameContainer"></div>
@@ -24,6 +26,8 @@
 				game.state.add('MainMenu', TheWalkingLady.MainMenu);
 				game.state.add('Game', TheWalkingLady.Game);
 				game.state.add('GameOverScreen', TheWalkingLady.GameOverScreen);
+				game.state.add('Help', TheWalkingLady.Help);
+				game.state.add('About', TheWalkingLady.About);
 
 				//	Now start the Boot state.
 				game.state.start('Boot');
