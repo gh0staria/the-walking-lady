@@ -1,0 +1,30 @@
+KEY (2)
+	* Placeholder replacement item
+	+ New item
+
+GRAPHICS (17)
+	* Background
+	* Floor
+	* Menu Buttons
+		* Play
+		* Help
+		* About
+		* MainMenu/Back
+		* Quit
+		* Restart
+		* Resume
+	* Pause button
+	+ Loading screen
+	* Loading bar
+	* Falling Items
+		* Bread
+		* Cheese
+		* Coin
+		* Gem
+		* Potion
+	
+MUSIC (4)
+	+ Menu music
+	+ Gameplay music
+	+ Collect item sound effect
+	+ game over sound effect
