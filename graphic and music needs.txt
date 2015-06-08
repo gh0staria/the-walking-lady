@@ -24,7 +24,7 @@ GRAPHICS (17)
 		* Potion
 	
 MUSIC (4)
-	+ Menu music
-	+ Gameplay music
-	+ Collect item sound effect
-	+ game over sound effect
+	+ Menu music (play on all menus. stop when game starts. start when menu starts.)
+	+ Gameplay music (play during game only. start when game starts. stop when player loses.)
+	+ Collect item sound effect (play only when an item is collected.)
+	+ game over sound effect (play when the player loses. not a song, but a sound effect.)

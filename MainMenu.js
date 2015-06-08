@@ -4,10 +4,13 @@ var menuTitle;
 var play;
 var help;
 var about;
+var menuMusic;
+var musicPlaying = false;
 
 function startGame() {
 	this.state.start('Game');
 	console.log('game state start');
+	menuMusic.stop();
 }
 
 function goToHelp() {
@@ -24,7 +27,7 @@ TheWalkingLady.MainMenu.prototype = {
 
 	create: function () {
 		this.stage.backgroundColor = '#ffedb7';
-		
+
 		//  Add game title image
 		menuTitle = this.add.sprite(0, 0, 'gameTitle');
 		
@@ -42,5 +45,14 @@ TheWalkingLady.MainMenu.prototype = {
 		about = this.add.sprite(100, 390, 'aboutBtn');
 		about.inputEnabled = true;
 		about.events.onInputDown.add(goToAbout, this);
+	},
+	update: function() {
+		//  Play music
+		if (musicPlaying === false) {
+			menuMusic = this.add.audio('titleMusic');
+			menuMusic.loop = true;
+			menuMusic.play();
+			musicPlaying = true;
+		}
 	}
 };

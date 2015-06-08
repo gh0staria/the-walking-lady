@@ -35,23 +35,24 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('resumeBtn', 'assets/buttons/placeholder_resume_button.png');
 		this.load.image('gotoMenuBtn', 'assets/buttons/placeholder_goto_menu_button.png');
 		this.load.image('pauseBtn', 'assets/buttons/placeholder_pause_button.png');
+		
+		//  Load music/sounds
+		this.load.audio('titleMusic', ['assets/audio/04Title.ogg', 'assets/04Title.m4a']);
+		this.load.audio('gameMusic', ['assets/audio/05Gameplay.ogg', 'assets/audio/05Gameplay.m4a']);
+		this.load.audio('gameOverSound', 'assets/audio/SadTrombone.ogg');
+		this.load.audio('collectItemSound', 'assets/audio/coin10.ogg');
 	},
 
 	create: function () {
-		//	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes. This is disabled because I currently have no music.
-		//this.preloadBar.cropEnabled = false;
-		
-		this.state.start('MainMenu');
-		console.log('start main menu state');
-	}/*,
+		//	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes.
+		this.preloadBar.cropEnabled = false;
+	},
 
 	update: function () {
 		//	Basically this will wait for our audio file to be decoded before proceeding to the MainMenu.
-		//  It's disabled right now because I currently have no music.
-		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false) {
+		if (this.cache.isSoundDecoded('titleMusic') && this.cache.isSoundDecoded('gameMusic') && this.ready == false) {
 			this.ready = true;
 			this.state.start('MainMenu');
 		}
 	}
-*/
 };

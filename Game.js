@@ -8,8 +8,12 @@ var faller;
 var addedGrav = 0;
 var w = 400;
 var h = 500;
+var musicPlaying2 = false;
+var collectSound;
 
 function collectItem(lady, item) {
+	collectSound = this.add.audio('collectItemSound');
+	collectSound.play();
 	item.kill();
 	score += 10;
 	scoreText.text = 'Score: ' + score;
@@ -67,7 +71,7 @@ TheWalkingLady.Game.prototype = {
 	create: function () {
 		this.stage.backgroundColor = '#ffedb7';
 		this.physics.startSystem(Phaser.Physics.ARCADE);
-
+		
 		//  add + setup floor
 		floor = this.add.sprite(0, this.world.height - 32, 'floor');
 		this.physics.arcade.enable(floor);
@@ -123,5 +127,14 @@ TheWalkingLady.Game.prototype = {
 		this.physics.arcade.collide(lady, floor);
 		this.physics.arcade.collide(items, floor);
 		this.physics.arcade.collide(faller, floor);
+		
+		//  Play music
+		if (musicPlaying2 === false) {
+			console.log('start music');
+			gameMusic = this.add.audio('gameMusic');
+			gameMusic.loop = true;
+			gameMusic.play();
+			musicPlaying2 = true;
+		}
     }
 };
