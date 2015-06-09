@@ -10,10 +10,11 @@ var w = 400;
 var h = 500;
 var gameMusicIsPlaying = false;
 var collectSound;
-var randomSecondAmount = 10;
+var powerupSpawnInterval = 10;
 var powerup;
 //  speedNumber controls the walk speed. 1 = slow, 2 = normal, 3 = fast.
 var speedNumber = 2;
+var badItemSpawnInterval = 15;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -53,7 +54,21 @@ function createPowerup() {
 	//  Set the gravity for the item
 	powerup.body.gravity.y = 300;
 	//  Randomize the interval
-	randomSecondAmount = Math.floor(Math.random() * 10);
+	powerupSpawnInterval = Math.floor(Math.random() * 10);
+}
+
+function createBadItem() {
+	//  Add the bad item at a random positon
+	badItem = this.add.sprite(this.world.randomX, -50, 'badItem');
+	//  Start physics on it
+	this.physics.enable(badItem, Phaser.Physics.ARCADE);
+	//  Add the item to the badItemGroup group
+	badItemGroup.add(badItem);
+	//  Set the gravity for the item
+	badItem.body.gravity.y = 400;
+	//  Randomize the interval
+	badItemSpawnInterval = Math.floor(Math.random() * 10);
+	
 }
 
 function gameOver() {
@@ -127,6 +142,11 @@ TheWalkingLady.Game.prototype = {
 		powerupGroup = this.add.group();
 		//  Enable physics on them
 		powerupGroup.enableBody = true;
+		
+		//  Create a group for all the bad items
+		badItemGroup = this.add.group();
+		//  Enable physics on them
+		badItemGroup.enableBody = true;
 
 		//  Add the score text in the upper left
 		scoreText = this.add.text(8, 8, 'Score: 0', {fontSize: '14px', fill: '#000'});
@@ -135,11 +155,11 @@ TheWalkingLady.Game.prototype = {
 		//  which should be more than enough. The player should lose before it reaches 1000.
 		this.time.events.repeat(Phaser.Timer.SECOND * 2, 1000, createFaller, this);
 		
-		//  Set a variable to a random amount of seconds between 0 and 15.
 		//  Add the powerup item spawn timer. It runs the createPowerup function every once in a while.
-		this.time.events.repeat(Phaser.Timer.SECOND * randomSecondAmount, 1000, createPowerup, this);
+		this.time.events.repeat(Phaser.Timer.SECOND * powerupSpawnInterval, 1000, createPowerup, this);
 		
 		//  Add the bad item spawn timer. It runs the createBadItem function every once in a while.
+		this.time.events.repeat(Phaser.Timer.SECOND * badItemSpawnInterval, 1000, createBadItem, this);
 		
 		/*//  Add pause button, commented out b/c pause is buggy
 		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
@@ -197,6 +217,7 @@ TheWalkingLady.Game.prototype = {
 				}
 				break;
 		}
+		
 		//  Collision checking
 		//  Run the collectItem function when the lady catches an item
 		this.physics.arcade.overlap(lady, items, collectItem, null, this);
@@ -216,6 +237,24 @@ TheWalkingLady.Game.prototype = {
 			powerupCaught.kill();
 			//  Increase the speed
 			speedNumber = 3;
+			//  Wait 6 seconds, then reset the speed back to normal
+			this.time.events.add(Phaser.Timer.SECOND * 6, function() {
+				speedNumber = 2;
+			}, this);
+		}, null, this);
+		
+		//  Run this function when a bad item touches the floor
+		this.physics.arcade.overlap(badItemGroup, floor, function (floor, badItemOnGround) {
+			//  Destroy the bad item
+			badItemOnGround.kill();
+		}, null, this);
+		
+		//  Run this function when the lady catches a bad item
+		this.physics.arcade.overlap(badItemGroup, lady, function (lady, badItemCaught) {
+			//  Destroy the bad item
+			badItemCaught.kill();
+			//  Decrease the speed
+			speedNumber = 1;
 			//  Wait 6 seconds, then reset the speed back to normal
 			this.time.events.add(Phaser.Timer.SECOND * 6, function() {
 				speedNumber = 2;
