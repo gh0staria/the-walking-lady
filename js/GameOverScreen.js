@@ -22,7 +22,10 @@ TheWalkingLady.GameOverScreen.prototype = {
 		restartButton.inputEnabled = true;
 		//  Run this function when we click it:
 		restartButton.events.onInputDown.add(function() {
-			//  Reset the score
+			//  Reset variables
+			powerupSpawnInterval = 10;
+			speedNumber = 2;
+			badItemSpawnInterval = 15;
 			score = 0;
 			//  Cut off the sound effect if it's still playing
 			gameOverSoundEffect.stop();
@@ -36,7 +39,10 @@ TheWalkingLady.GameOverScreen.prototype = {
 		quitButton.inputEnabled = true;
 		//  Run this function when we click it:
 		quitButton.events.onInputDown.add(function() {
-			//  Reset score
+			//  Reset variables
+			powerupSpawnInterval = 10;
+			speedNumber = 2;
+			badItemSpawnInterval = 15;
 			score = 0;
 			//  Cut off the sound effect if it's still playing
 			gameOverSoundEffect.stop();

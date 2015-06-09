@@ -177,45 +177,45 @@ TheWalkingLady.Game.prototype = {
 		cursors = this.input.keyboard.createCursorKeys();
 		//  Check the speed number
 		switch (speedNumber) {
-			case 1:
-				//  Slow speed controls
-				if (cursors.left.isDown) {
-					lady.body.velocity.x = -100;
-					lady.animations.play('left');
-				} else if (cursors.right.isDown) {
-					lady.body.velocity.x = 100;
-					lady.animations.play('right');
-				} else {
-					lady.animations.stop();
-					lady.frame = 7;
-				}
-				break;
-			case 2:
-				//  Normal speed controls
-				if (cursors.left.isDown) {
-					lady.body.velocity.x = -200;
-					lady.animations.play('left');
-				} else if (cursors.right.isDown) {
-					lady.body.velocity.x = 200;
-					lady.animations.play('right');
-				} else {
-					lady.animations.stop();
-					lady.frame = 7;
-				}
-				break;
-			case 3:
-				//  Fast speed controls
-				if (cursors.left.isDown) {
-					lady.body.velocity.x = -300;
-					lady.animations.play('left');
-				} else if (cursors.right.isDown) {
-					lady.body.velocity.x = 300;
-					lady.animations.play('right');
-				} else {
-					lady.animations.stop();
-					lady.frame = 7;
-				}
-				break;
+		case 1:
+			//  Slow speed controls
+			if (cursors.left.isDown) {
+				lady.body.velocity.x = -50;
+				lady.animations.play('left');
+			} else if (cursors.right.isDown) {
+				lady.body.velocity.x = 50;
+				lady.animations.play('right');
+			} else {
+				lady.animations.stop();
+				lady.frame = 7;
+			}
+			break;
+		case 2:
+			//  Normal speed controls
+			if (cursors.left.isDown) {
+				lady.body.velocity.x = -200;
+				lady.animations.play('left');
+			} else if (cursors.right.isDown) {
+				lady.body.velocity.x = 200;
+				lady.animations.play('right');
+			} else {
+				lady.animations.stop();
+				lady.frame = 7;
+			}
+			break;
+		case 3:
+			//  Fast speed controls
+			if (cursors.left.isDown) {
+				lady.body.velocity.x = -500;
+				lady.animations.play('left');
+			} else if (cursors.right.isDown) {
+				lady.body.velocity.x = 500;
+				lady.animations.play('right');
+			} else {
+				lady.animations.stop();
+				lady.frame = 7;
+			}
+			break;
 		}
 		
 		//  Collision checking
@@ -256,7 +256,7 @@ TheWalkingLady.Game.prototype = {
 			//  Decrease the speed
 			speedNumber = 1;
 			//  Wait 6 seconds, then reset the speed back to normal
-			this.time.events.add(Phaser.Timer.SECOND * 6, function() {
+			this.time.events.add(Phaser.Timer.SECOND * 6, function () {
 				speedNumber = 2;
 			}, this);
 		}, null, this);
