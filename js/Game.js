@@ -1,47 +1,53 @@
 
 TheWalkingLady.Game = function (game) {};
 
+//  Set up our variables
 var score = 0;
 var scoreText;
 var spawnTimer;
 var faller;
-var addedGrav = 0;
 var w = 400;
 var h = 500;
-var musicPlaying2 = false;
+var gameMusicIsPlaying = false;
 var collectSound;
 
 function collectItem(lady, item) {
+	//  Play a sound
 	collectSound = this.add.audio('collectItemSound');
 	collectSound.play();
+	//  Destroy the item
 	item.kill();
+	//  Add 10 the the score
 	score += 10;
+	//  Update the score counter in the upper left
 	scoreText.text = 'Score: ' + score;
-	addedGrav += 10;
-	faller.body.gravity.y = 100 + addedGrav;
+	//  Update the gravity
+	faller.body.gravity.y = 100 + score;
 }
 
 function createFaller() {
+	//  Set up an array with all the different types of items we're going to choose from
 	var itemsArray = ['potion', 'cheese', 'bread', 'coin', 'gem'];
-	//  add item
+	//  Add the item at a random position
 	faller = this.add.sprite(this.world.randomX, -100, itemsArray[Math.floor(Math.random() * 5)]);
 	faller.anchor.set(0.5);
-	//  item physics
+	//  Start physics on the item
 	this.physics.enable(faller, Phaser.Physics.ARCADE);
+	//  Add the item to the 'items' group
 	items.add(faller);
-	faller.body.gravity.y = 100 + addedGrav;
+	//  Set the gravity for the item
+	faller.body.gravity.y = 100 + score;
 }
 
 function gameOver() {
+	//  Start the game over state
 	this.state.start('GameOverScreen');
-	console.log('start game over screen state');
 }
 
-function pauseGame() {
+/*function pauseGame() {
+	//  THIS WHOLE PAUSE THING IS BUGGY SO I'M DISABLING IT FOR NOW
 	//  Pause the game
-	this.game.paused = true;
-	console.log('game paused');
-	
+	this.game.paused = true;	
 	// Add the resume button
 	var resumeButton = this.add.sprite(w / 2, h / 2, 'resumeBtn');
 	resumeButton.anchor.set(0.5);
@@ -65,51 +71,61 @@ function pauseGame() {
 		//  Add the quit button
 		//this.add.sprite(100, 320, 'quitBtn');
 	}
-}
+}*/
 
 TheWalkingLady.Game.prototype = {
 	create: function () {
+		//  Set the screen's background color
 		this.stage.backgroundColor = '#ffedb7';
+		//  Start the physics system
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		
-		//  add + setup floor
+		//  Add the floor
 		floor = this.add.sprite(0, this.world.height - 32, 'floor');
+		//  Enable physics on it
 		this.physics.arcade.enable(floor);
+		//  Make the floor a static object so it doesn't fall when the lady is on it
 		floor.body.immovable = true;
 
-		//  add + setup lady
+		//  Add the lady
 		lady = this.add.sprite(this.world.width / 2, this.world.height - 94, 'lady');
-		lady.anchor.set(0.5);
+		//  Make her twice as big
 		lady.scale.setTo(2, 2);
+		//  Turn off smoothing so the pixel art looks nice
 		lady.smoothed = false;
-		//  lady physics
+		//  Setup physics for the lady
 		this.physics.arcade.enable(lady);
 		lady.body.gravity.y = 300;
 		lady.body.collideWorldBounds = true;
-		//  lady animations
+		//  Add her animations
 		lady.animations.add('left', [10, 9, 11, 9], 7, true);
 		lady.animations.add('right', [4, 5, 3], 7, true);
 
-		//  create items group
+		//  Create a group for all the falling items
 		items = this.add.group();
+		//  Enable physics on them
 		items.enableBody = true;
 
-		//  score
+		//  Add the score text in the upper left
 		scoreText = this.add.text(8, 8, 'Score: 0', {fontSize: '14px', fill: '#000'});
-		//  timer
+		//  Add the timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
+		//  which should be more than enough. The player should lose before it reaches 1000.
 		this.time.events.repeat(Phaser.Timer.SECOND * 2, 1000, createFaller, this);
 		
-		//  Add pause button
+		/*//  Add pause button, commented out b/c pause is buggy
 		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
+		//  Make it clickable
 		pauseButton.inputEnabled = true;
-		pauseButton.events.onInputDown.add(pauseGame, this);
+		//  Make it so when you click on it, it runs the function pauseGame
+		//pauseButton.events.onInputDown.add(pauseGame, this);*/
 	},
 	
 	update: function () {
-        cursors = this.input.keyboard.createCursorKeys();
-		lady.body.velocity.x = 0; // reset movement
+		//  Reset the lady's movement
+		lady.body.velocity.x = 0;
 
-		//  key events
+		//  Key events
+		cursors = this.input.keyboard.createCursorKeys();
 		if (cursors.left.isDown) {
 			lady.body.velocity.x = -200;
 			lady.animations.play('left');
@@ -120,7 +136,7 @@ TheWalkingLady.Game.prototype = {
 			lady.animations.stop();
 			lady.frame = 7;
 		}
-		//  collision checking
+		//  Collision checking
 		this.physics.arcade.overlap(lady, items, collectItem, null, this);
 		this.physics.arcade.overlap(items, floor, gameOver, null, this);
 
@@ -128,13 +144,14 @@ TheWalkingLady.Game.prototype = {
 		this.physics.arcade.collide(items, floor);
 		this.physics.arcade.collide(faller, floor);
 		
-		//  Play music
-		if (musicPlaying2 === false) {
-			console.log('start music');
+		//  Check if music isn't already playing
+		if (gameMusicIsPlaying === false) {
+			// Play the music on a loop
 			gameMusic = this.add.audio('gameMusic');
 			gameMusic.loop = true;
 			gameMusic.play();
-			musicPlaying2 = true;
+			//  Set the variable so we can check it later
+			gameMusicIsPlaying = true;
 		}
     }
 };

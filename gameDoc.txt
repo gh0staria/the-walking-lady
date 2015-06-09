@@ -1,6 +1,8 @@
 KEY (2)
 	* Placeholder replacement item
 	+ New item
+	- Item to be removed
+	o Other item
 
 GRAPHICS (17)
 	* Background
@@ -27,4 +29,7 @@ MUSIC (4)
 	+ Menu music (play on all menus. stop when game starts. start when menu starts.)
 	+ Gameplay music (play during game only. start when game starts. stop when player loses.)
 	+ Collect item sound effect (play only when an item is collected.)
-	+ game over sound effect (play when the player loses. not a song, but a sound effect.)
+	+ Game over sound effect (play when the player loses. not a song, but a sound effect.)
+	
+VARIOUS THINGS
+	o Rework the way items spawn so they aren't on the edges of the screen
