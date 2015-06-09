@@ -1,5 +1,5 @@
 KEY (4)
-	* Placeholder replacement item
+	* Placeholder replacement item/to be changed item
 	+ New item
 	- Item to be removed
 	o Other item
@@ -24,12 +24,21 @@ GRAPHICS (17)
 		* Coin
 		* Gem
 		* Potion
+	* Powerup
+	* Bad item
+	* Various Menu backgrounds
+		* Main Menu
+		* Help
+		* About
+		* Game Over
 	
-MUSIC (4)
-	+ Menu music (play on all menus. stop when game starts. start when menu starts.)
-	+ Gameplay music (play during game only. start when game starts. stop when player loses.)
-	+ Collect item sound effect (play only when an item is collected.)
-	+ Game over sound effect (play when the player loses. not a song, but a sound effect.)
+MUSIC (6)
+	o Menu music (play on all menus. stop when game starts. start when menu starts.)
+	o Gameplay music (play during game only. start when game starts. stop when player loses.)
+	o Collect item sound effect (play only when an item is collected.)
+	+ Collect powerup
+	+ Collect bad item
+	* Game over sound effect (play when the player loses. not a song, but a sound effect.)
 	
 VARIOUS THINGS
 	o Rework the way items spawn so they aren't on the edges of the screen

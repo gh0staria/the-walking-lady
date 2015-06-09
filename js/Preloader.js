@@ -36,10 +36,12 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('pauseBtn', 'assets/buttons/placeholder_pause_button.png');
 		
 		//  Load music/sound effects
-		this.load.audio('titleMusic', ['assets/audio/04Title.ogg', 'assets/04Title.m4a']);
-		this.load.audio('gameMusic', ['assets/audio/05Gameplay.ogg', 'assets/audio/05Gameplay.m4a']);
-		this.load.audio('gameOverSound', 'assets/audio/SadTrombone.ogg');
-		this.load.audio('collectItemSound', 'assets/audio/coin10.ogg');
+		this.load.audio('titleMusic', ['assets/audio/music_Title.ogg', 'assets/audio/music_Title.m4a']);
+		this.load.audio('gameMusic', ['assets/audio/music_Gameplay.ogg', 'assets/audio/music_Gameplay.m4a']);
+		this.load.audio('gameOverSound', 'assets/audio/sound_GameOver.ogg');
+		this.load.audio('collectItemSound', 'assets/audio/sound_CollectItem.ogg');
+		this.load.audio('powerupSound', 'assets/audio/sound_Powerup.ogg');
+		this.load.audio('badItemSound', 'assets/audio/sound_BadItem.ogg');
 	},
 
 	create: function () {
