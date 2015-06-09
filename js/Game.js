@@ -235,6 +235,9 @@ TheWalkingLady.Game.prototype = {
 		this.physics.arcade.overlap(powerupGroup, lady, function (lady, powerupCaught) {
 			//  Destroy the powerup
 			powerupCaught.kill();
+			//  Play the powerup sound
+			powerupSound = this.add.audio('powerupSound');
+			powerupSound.play();
 			//  Increase the speed
 			speedNumber = 3;
 			//  Wait 6 seconds, then reset the speed back to normal
@@ -253,6 +256,9 @@ TheWalkingLady.Game.prototype = {
 		this.physics.arcade.overlap(badItemGroup, lady, function (lady, badItemCaught) {
 			//  Destroy the bad item
 			badItemCaught.kill();
+			//  Play the bad item sound
+			badItemSound = this.add.audio('badItemSound');
+			badItemSound.play();
 			//  Decrease the speed
 			speedNumber = 1;
 			//  Wait 6 seconds, then reset the speed back to normal
