@@ -1,4 +1,4 @@
-KEY (2)
+KEY (4)
 	* Placeholder replacement item
 	+ New item
 	- Item to be removed

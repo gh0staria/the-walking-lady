@@ -10,6 +10,10 @@ var w = 400;
 var h = 500;
 var gameMusicIsPlaying = false;
 var collectSound;
+var randomSecondAmount = 10;
+var powerup;
+//  speedNumber controls the walk speed. 1 = slow, 2 = normal, 3 = fast.
+var speedNumber = 2;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -29,7 +33,7 @@ function createFaller() {
 	//  Set up an array with all the different types of items we're going to choose from
 	var itemsArray = ['potion', 'cheese', 'bread', 'coin', 'gem'];
 	//  Add the item at a random position
-	faller = this.add.sprite(this.world.randomX, -100, itemsArray[Math.floor(Math.random() * 5)]);
+	faller = this.add.sprite(this.world.randomX, -50, itemsArray[Math.floor(Math.random() * 5)]);
 	faller.anchor.set(0.5);
 	//  Start physics on the item
 	this.physics.enable(faller, Phaser.Physics.ARCADE);
@@ -37,6 +41,19 @@ function createFaller() {
 	items.add(faller);
 	//  Set the gravity for the item
 	faller.body.gravity.y = 100 + score;
+}
+
+function createPowerup() {
+	//  Add the powerup at a random position
+	powerup = this.add.sprite(this.world.randomX, -50, 'powerup');
+	//  Start physics on the item
+	this.physics.enable(powerup, Phaser.Physics.ARCADE);
+	//  Add the item to the powerupGroup group
+	powerupGroup.add(powerup);
+	//  Set the gravity for the item
+	powerup.body.gravity.y = 300;
+	//  Randomize the interval
+	randomSecondAmount = Math.floor(Math.random() * 10);
 }
 
 function gameOver() {
@@ -105,12 +122,24 @@ TheWalkingLady.Game.prototype = {
 		items = this.add.group();
 		//  Enable physics on them
 		items.enableBody = true;
+		
+		//  Create a group for all the powerups
+		powerupGroup = this.add.group();
+		//  Enable physics on them
+		powerupGroup.enableBody = true;
 
 		//  Add the score text in the upper left
 		scoreText = this.add.text(8, 8, 'Score: 0', {fontSize: '14px', fill: '#000'});
-		//  Add the timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
+		
+		//  Add the main item spawn timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
 		//  which should be more than enough. The player should lose before it reaches 1000.
 		this.time.events.repeat(Phaser.Timer.SECOND * 2, 1000, createFaller, this);
+		
+		//  Set a variable to a random amount of seconds between 0 and 15.
+		//  Add the powerup item spawn timer. It runs the createPowerup function every once in a while.
+		this.time.events.repeat(Phaser.Timer.SECOND * randomSecondAmount, 1000, createPowerup, this);
+		
+		//  Add the bad item spawn timer. It runs the createBadItem function every once in a while.
 		
 		/*//  Add pause button, commented out b/c pause is buggy
 		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
@@ -126,23 +155,75 @@ TheWalkingLady.Game.prototype = {
 
 		//  Key events
 		cursors = this.input.keyboard.createCursorKeys();
-		if (cursors.left.isDown) {
-			lady.body.velocity.x = -200;
-			lady.animations.play('left');
-		} else if (cursors.right.isDown) {
-			lady.body.velocity.x = 200;
-			lady.animations.play('right');
-		} else {
-			lady.animations.stop();
-			lady.frame = 7;
+		//  Check the speed number
+		switch (speedNumber) {
+			case 1:
+				//  Slow speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -100;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 100;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
+			case 2:
+				//  Normal speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -200;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 200;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
+			case 3:
+				//  Fast speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -300;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 300;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
 		}
 		//  Collision checking
+		//  Run the collectItem function when the lady catches an item
 		this.physics.arcade.overlap(lady, items, collectItem, null, this);
+		
+		//  Run the gameOver runction when an item touches the floor
 		this.physics.arcade.overlap(items, floor, gameOver, null, this);
+		
+		//  Run this function when a powerup touches the floor
+		this.physics.arcade.overlap(powerupGroup, floor, function (floor, powerupOnGround) {
+			//  Destroy the powerup
+			powerupOnGround.kill();
+		}, null, this);
+		
+		//  Run this function when the lady catches a powerup
+		this.physics.arcade.overlap(powerupGroup, lady, function (lady, powerupCaught) {
+			//  Destroy the powerup
+			powerupCaught.kill();
+			//  Increase the speed
+			speedNumber = 3;
+			//  Wait 6 seconds, then reset the speed back to normal
+			this.time.events.add(Phaser.Timer.SECOND * 6, function() {
+				speedNumber = 2;
+			}, this);
+		}, null, this);
 
+		//  Make the lady and the floor collide
 		this.physics.arcade.collide(lady, floor);
-		this.physics.arcade.collide(items, floor);
-		this.physics.arcade.collide(faller, floor);
 		
 		//  Check if music isn't already playing
 		if (gameMusicIsPlaying === false) {

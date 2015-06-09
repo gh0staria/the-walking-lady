@@ -20,6 +20,10 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('coin', 'assets/imgs/item_coin.png');
 		this.load.image('gem', 'assets/imgs/item_gem.png');
 		
+		//  Load powerups/bad items
+		this.load.image('powerup', 'assets/imgs/powerup_speed.png');
+		this.load.image('badItem', 'assets/imgs/powerup_slow.png');
+		
 		// Load menu buttons/images
 		this.load.image('gameTitle', 'assets/buttons/placeholder_game_title.png');
 		this.load.image('playBtn', 'assets/buttons/placeholder_play_button.png');
