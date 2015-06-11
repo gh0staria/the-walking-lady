@@ -121,6 +121,7 @@ TheWalkingLady.Game.prototype = {
 
 		//  Add the lady
 		lady = this.add.sprite(this.world.width / 2, this.world.height - 94, 'lady');
+		lady.anchor.set(0.5, 0);
 		//  Make her twice as big
 		lady.scale.setTo(2, 2);
 		//  Turn off smoothing so the pixel art looks nice
