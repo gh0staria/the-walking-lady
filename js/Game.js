@@ -12,7 +12,7 @@ var powerup;
 var speedNumber = 2;
 var powerupSpawnInterval = [8000, 9000, 13000];
 var badItemSpawnInterval = [6000, 11000, 15000];
-var itemSpawnInterval = [1000, 2000, 3000]
+var itemSpawnInterval = [1000, 2000, 3000];
 var randArrayNumber = 2;
 
 function collectItem(lady, item) {
@@ -33,8 +33,7 @@ function createFaller() {
 	//  Set up an array with all the different types of items we're going to choose from
 	var itemsArray = ['potion', 'cheese', 'bread', 'coin', 'gem'];
 	//  Add the item at a random position
-	faller = this.add.sprite(this.world.randomX, -50, itemsArray[Math.floor(Math.random() * 5)]);
-	faller.anchor.set(0.5);
+	faller = this.add.sprite(Math.floor(Math.random() * 366), -50, itemsArray[Math.floor(Math.random() * 5)]);
 	//  Start physics on the item
 	this.physics.enable(faller, Phaser.Physics.ARCADE);
 	//  Add the item to the 'items' group
@@ -47,7 +46,7 @@ function createFaller() {
 
 function createPowerup() {
 	//  Add the powerup at a random position
-	powerup = this.add.sprite(this.world.randomX, -50, 'powerup');
+	powerup = this.add.sprite(Math.floor(Math.random() * 366), -50, 'powerup');
 	//  Start physics on the item
 	this.physics.enable(powerup, Phaser.Physics.ARCADE);
 	//  Add the item to the powerupGroup group
@@ -59,7 +58,7 @@ function createPowerup() {
 
 function createBadItem() {
 	//  Add the bad item at a random positon
-	badItem = this.add.sprite(this.world.randomX, -50, 'badItem');
+	badItem = this.add.sprite(Math.floor(Math.random() * 366), -50, 'badItem');
 	//  Start physics on it
 	this.physics.enable(badItem, Phaser.Physics.ARCADE);
 	//  Add the item to the badItemGroup group
