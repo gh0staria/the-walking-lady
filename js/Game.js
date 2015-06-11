@@ -14,6 +14,7 @@ var powerupSpawnInterval = [8000, 9000, 13000];
 var badItemSpawnInterval = [6000, 11000, 15000];
 var itemSpawnInterval = [1000, 2000, 3000];
 var randArrayNumber = 2;
+var lives = 3;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -70,9 +71,17 @@ function createBadItem() {
 	
 }
 
-function gameOver() {
-	//  Start the game over state
-	this.state.start('GameOverScreen');
+function checkLives(floor, item) {
+	//  Take away a life
+	lives -= 1;
+	//  Destroy the item
+	item.kill();
+	console.log('you just lost a life! :(');
+	//  Check to see if player is dead
+	if (lives === 0) {
+		//  Start the game over state
+		this.state.start('GameOverScreen');
+	}
 }
 
 /*function pauseGame() {
@@ -222,8 +231,8 @@ TheWalkingLady.Game.prototype = {
 		//  Run the collectItem function when the lady catches an item
 		this.physics.arcade.overlap(lady, items, collectItem, null, this);
 		
-		//  Run the gameOver runction when an item touches the floor
-		this.physics.arcade.overlap(items, floor, gameOver, null, this);
+		//  Run the checkLives runction when an item touches the floor
+		this.physics.arcade.collide(items, floor, checkLives, null, this);
 		
 		//  Run this function when a powerup touches the floor
 		this.physics.arcade.overlap(powerupGroup, floor, function (floor, powerupOnGround) {
