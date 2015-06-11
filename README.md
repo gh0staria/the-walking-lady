@@ -5,8 +5,9 @@ A short and simple falling objects game. Written to see what I could do with the
 Use the arrow keys to move and collect the falling items. Collect powerups to increase your speed, but stay away from the bad items! They make you slower. Every time a food item hits the ground you lose a life, and you only have three!
 
 ## Credits
-Code by [gh0staria](https://gh0staria.wordpress.com/)  return
-Graphics by [Simon "Punstar" Heimersson](https://instagram.com/simonthepunstar/) and [gh0staria](https://gh0staria.wordpress.com/)  return
+Code by [gh0staria](https://gh0staria.wordpress.com/)
+
+Graphics by [Simon "Punstar" Heimersson](https://instagram.com/simonthepunstar/) and [gh0staria](https://gh0staria.wordpress.com/)
 
 ##### Audio
 ["RottenMage SpaceJacked OST 05"](http://freemusicarchive.org/music/sawsquarenoise/RottenMage_SpaceJacked/RottenMage_SpaceJacked_OST_05) by [sawsquarenoise](http://freemusicarchive.org/music/sawsquarenoise/) is liscensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
