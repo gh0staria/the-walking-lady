@@ -15,6 +15,9 @@ var badItemSpawnInterval = [6000, 11000, 15000];
 var itemSpawnInterval = [1000, 2000, 3000];
 var randArrayNumber = 2;
 var lives = 3;
+var heart1;
+var heart2;
+var heart3;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -55,7 +58,8 @@ function createPowerup() {
 	//  Set the gravity for the item
 	powerup.body.gravity.y = 300;
 	//  Randomize the interval
-	randArrayNumber = Math.floor(Math.random() * 2);}
+	randArrayNumber = Math.floor(Math.random() * 2);
+}
 
 function createBadItem() {
 	//  Add the bad item at a random positon
@@ -76,11 +80,18 @@ function checkLives(floor, item) {
 	lives -= 1;
 	//  Destroy the item
 	item.kill();
-	console.log('you just lost a life! :(');
 	//  Check to see if player is dead
 	if (lives === 0) {
 		//  Start the game over state
 		this.state.start('GameOverScreen');
+	}
+	if (lives === 2) {
+		//  Take away a heart
+		heart3.destroy();
+	}
+	if (lives === 1) {
+		//  Take away a heart
+		heart2.destroy();
 	}
 }
 
@@ -169,6 +180,11 @@ TheWalkingLady.Game.prototype = {
 		
 		//  Add the bad item spawn timer. It runs the createBadItem function every once in a while.
 		this.time.events.repeat(badItemSpawnInterval[randArrayNumber], 1000, createBadItem, this);
+			
+		//  Render Hearts
+		heart1 = this.add.sprite(100, 10, 'heart');
+		heart2 = this.add.sprite(130, 10, 'heart');
+		heart3 = this.add.sprite(160, 10, 'heart');
 		
 		/*//  Add pause button, commented out b/c pause is buggy
 		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
@@ -176,6 +192,7 @@ TheWalkingLady.Game.prototype = {
 		pauseButton.inputEnabled = true;
 		//  Make it so when you click on it, it runs the function pauseGame
 		//pauseButton.events.onInputDown.add(pauseGame, this);*/
+		
 	},
 	
 	update: function () {
@@ -250,7 +267,7 @@ TheWalkingLady.Game.prototype = {
 			//  Increase the speed
 			speedNumber = 3;
 			//  Wait 6 seconds, then reset the speed back to normal
-			this.time.events.add(Phaser.Timer.SECOND * 6, function() {
+			this.time.events.add(Phaser.Timer.SECOND * 6, function () {
 				speedNumber = 2;
 			}, this);
 		}, null, this);

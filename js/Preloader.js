@@ -34,6 +34,7 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('resumeBtn', 'assets/buttons/placeholder_resume_button.png');
 		this.load.image('gotoMenuBtn', 'assets/buttons/placeholder_goto_menu_button.png');
 		this.load.image('pauseBtn', 'assets/buttons/placeholder_pause_button.png');
+		this.load.image('heart', 'assets/buttons/placeholder_pause_button.png');
 		
 		//  Load music/sound effects
 		this.load.audio('titleMusic', ['assets/audio/music_Title.ogg', 'assets/audio/music_Title.m4a']);

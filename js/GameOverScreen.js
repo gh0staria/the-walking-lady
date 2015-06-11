@@ -23,10 +23,10 @@ TheWalkingLady.GameOverScreen.prototype = {
 		//  Run this function when we click it:
 		restartButton.events.onInputDown.add(function() {
 			//  Reset variables
-			powerupSpawnInterval = 10;
 			speedNumber = 2;
-			badItemSpawnInterval = 15;
 			score = 0;
+			lives = 3;
+			var randArrayNumber = 2;
 			//  Cut off the sound effect if it's still playing
 			gameOverSoundEffect.stop();
 			//  Restart the game
