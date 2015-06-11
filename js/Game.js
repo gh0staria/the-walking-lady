@@ -180,10 +180,10 @@ TheWalkingLady.Game.prototype = {
 		case 1:
 			//  Slow speed controls
 			if (cursors.left.isDown) {
-				lady.body.velocity.x = -100;
+				lady.body.velocity.x = -50;
 				lady.animations.play('left');
 			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 100;
+				lady.body.velocity.x = 50;
 				lady.animations.play('right');
 			} else {
 				lady.animations.stop();
