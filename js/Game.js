@@ -4,17 +4,16 @@ TheWalkingLady.Game = function (game) {};
 //  Set up our variables
 var score = 0;
 var scoreText;
-var spawnTimer;
 var faller;
-var w = 400;
-var h = 500;
 var gameMusicIsPlaying = false;
 var collectSound;
-var powerupSpawnInterval = 10;
 var powerup;
 //  speedNumber controls the walk speed. 1 = slow, 2 = normal, 3 = fast.
 var speedNumber = 2;
-var badItemSpawnInterval = 15;
+var powerupSpawnInterval = [8000, 9000, 13000];
+var badItemSpawnInterval = [6000, 11000, 15000];
+var itemSpawnInterval = [1000, 2000, 3000]
+var randArrayNumber = 2;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -42,6 +41,8 @@ function createFaller() {
 	items.add(faller);
 	//  Set the gravity for the item
 	faller.body.gravity.y = 100 + score;
+	//  Randomize the interval
+	randArrayNumber = Math.floor(Math.random() * 2);
 }
 
 function createPowerup() {
@@ -54,8 +55,7 @@ function createPowerup() {
 	//  Set the gravity for the item
 	powerup.body.gravity.y = 300;
 	//  Randomize the interval
-	powerupSpawnInterval = Math.floor(Math.random() * 10);
-}
+	randArrayNumber = Math.floor(Math.random() * 2);}
 
 function createBadItem() {
 	//  Add the bad item at a random positon
@@ -67,7 +67,7 @@ function createBadItem() {
 	//  Set the gravity for the item
 	badItem.body.gravity.y = 400;
 	//  Randomize the interval
-	badItemSpawnInterval = Math.floor(Math.random() * 10);
+	randArrayNumber = Math.floor(Math.random() * 2);
 	
 }
 
@@ -153,13 +153,13 @@ TheWalkingLady.Game.prototype = {
 		
 		//  Add the main item spawn timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
 		//  which should be more than enough. The player should lose before it reaches 1000.
-		this.time.events.repeat(Phaser.Timer.SECOND * 2, 1000, createFaller, this);
+		this.time.events.repeat(itemSpawnInterval[randArrayNumber], 1000, createFaller, this);
 		
 		//  Add the powerup item spawn timer. It runs the createPowerup function every once in a while.
-		this.time.events.repeat(Phaser.Timer.SECOND * powerupSpawnInterval, 1000, createPowerup, this);
+		this.time.events.repeat(powerupSpawnInterval[randArrayNumber], 1000, createPowerup, this);
 		
 		//  Add the bad item spawn timer. It runs the createBadItem function every once in a while.
-		this.time.events.repeat(Phaser.Timer.SECOND * badItemSpawnInterval, 1000, createBadItem, this);
+		this.time.events.repeat(badItemSpawnInterval[randArrayNumber], 1000, createBadItem, this);
 		
 		/*//  Add pause button, commented out b/c pause is buggy
 		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
