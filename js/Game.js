@@ -19,6 +19,7 @@ var heart1;
 var heart2;
 var heart3;
 var pauseButton;
+var paused = false;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -117,7 +118,13 @@ function checkLives(floor, item) {
 }
 
 function pauseGame() {
-	console.log('game paused');
+	if (paused === false) {
+		this.physics.arcade.isPaused = true;
+		paused = true;
+	} else {
+		this.physics.arcade.isPaused = false;
+		paused = false;
+	}
 }
 
 TheWalkingLady.Game.prototype = {
@@ -202,50 +209,52 @@ TheWalkingLady.Game.prototype = {
 	update: function () {
 		//  Reset the lady's movement
 		lady.body.velocity.x = 0;
-
-		//  Key events
-		cursors = this.input.keyboard.createCursorKeys();
-		//  Check the speed number
-		switch (speedNumber) {
-		case 1:
-			//  Slow speed controls
-			if (cursors.left.isDown) {
-				lady.body.velocity.x = -50;
-				lady.animations.play('left');
-			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 50;
-				lady.animations.play('right');
-			} else {
-				lady.animations.stop();
-				lady.frame = 7;
+		
+		if (paused === false) {
+			//  Key events
+			cursors = this.input.keyboard.createCursorKeys();
+			//  Check the speed number
+			switch (speedNumber) {
+			case 1:
+				//  Slow speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -50;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 50;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
+			case 2:
+				//  Normal speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -200;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 200;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
+			case 3:
+				//  Fast speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -400;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 400;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
 			}
-			break;
-		case 2:
-			//  Normal speed controls
-			if (cursors.left.isDown) {
-				lady.body.velocity.x = -200;
-				lady.animations.play('left');
-			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 200;
-				lady.animations.play('right');
-			} else {
-				lady.animations.stop();
-				lady.frame = 7;
-			}
-			break;
-		case 3:
-			//  Fast speed controls
-			if (cursors.left.isDown) {
-				lady.body.velocity.x = -400;
-				lady.animations.play('left');
-			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 400;
-				lady.animations.play('right');
-			} else {
-				lady.animations.stop();
-				lady.frame = 7;
-			}
-			break;
 		}
 		
 		//  Collision checking
