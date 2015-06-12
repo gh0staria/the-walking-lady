@@ -2,11 +2,12 @@ TheWalkingLady.GameOverScreen = function (game) {};
 
 var restartButton;
 var quitButton;
+var scoreText;
 
 TheWalkingLady.GameOverScreen.prototype = {
 	create: function () {
-		//  Set the screen's background color
-		this.stage.backgroundColor = '#ffedb7';
+		//  Set the screen's background
+		this.add.sprite(0, 0, 'gameOverScreen');
 		
 		//  Stop the game music
 		backgroundSongs.stop('gameMusic');
@@ -18,7 +19,7 @@ TheWalkingLady.GameOverScreen.prototype = {
 		soundEffects.play('gameOver');
 		
 		//  Add the restart button
-		restartButton = this.add.sprite(100, 250, 'buttonAtlas');
+		restartButton = this.add.sprite(100, 320, 'buttonAtlas');
 		restartButton.frameName = 'btn_Restart';
 		//  Make it clickable
 		restartButton.inputEnabled = true;
@@ -36,7 +37,7 @@ TheWalkingLady.GameOverScreen.prototype = {
 		}, this);
 		
 		//  Add the quit button
-		quitButton = this.add.sprite(100, 360, 'buttonAtlas');
+		quitButton = this.add.sprite(100, 400, 'buttonAtlas');
 		quitButton.frameName = 'btn_Quit';
 		//  Make it clickable
 		quitButton.inputEnabled = true;
@@ -60,9 +61,9 @@ TheWalkingLady.GameOverScreen.prototype = {
 			this.state.start('MainMenu');
 		}, this);
 		
-		//  Add text to display
-		this.add.text(100, 100, "GAME OVER!");
-		this.add.text(100, 125, "Your score was:");
-		this.add.text(100, 150, score);
+		scoreText = this.add.text(10, 150, score);
+		scoreText.font = 'monospace';
+		scoreText.fontSize = 100;
+		scoreText.fill = '#eab22a'
 	}
 };

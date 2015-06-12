@@ -22,6 +22,8 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('creditsMenu', 'assets/backgrounds/bkgd_CreditsMenu.png');
 		this.load.image('howToPlayMenu', 'assets/backgrounds/bkgd_HowToPlayMenu.png');
 		this.load.image('mainMenu', 'assets/backgrounds/bkgd_MainMenu.png');
+		this.load.image('gameScreen', 'assets/backgrounds/bkgd_GameScreen.png');
+		this.load.image('gameOverScreen', 'assets/backgrounds/bkgd_GameOver.png');
 		
 		//  Load music/sound effects
 		this.load.audio('backgroundMusic', 'assets/audio/backgroundSongs.ogg', 'assets/audio/backgroundSongs.mp3');

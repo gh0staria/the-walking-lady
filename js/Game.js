@@ -117,8 +117,9 @@ function checkLives(floor, item) {
 
 TheWalkingLady.Game.prototype = {
 	create: function () {
-		//  Set the screen's background color
-		this.stage.backgroundColor = '#ffedb7';
+		//  Set the screen's background
+		this.add.sprite(0, 0, 'gameScreen');
+		
 		//  Start the physics system
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		
