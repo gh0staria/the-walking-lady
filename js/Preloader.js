@@ -14,6 +14,7 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.spritesheet('lady', 'assets/sprites/sh_Lady.png', 20, 31);
 		this.load.image('floor', 'assets/sprites/spr_Floor.png');
 		this.load.atlasJSONHash('spriteAtlas', 'assets/sprites/SpritesSpritesheet.png', 'assets/sprites/SpritesSpritesheet.json');
+		this.load.image('scoreHolder', 'assets/sprites/scoreBox.png');
 		
 		// Load buttons
 		this.load.atlasJSONHash('buttonAtlas', 'assets/sprites/ButtonSpritesheet.png', 'assets/sprites/ButtonSpritesheet.json');

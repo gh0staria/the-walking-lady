@@ -26,6 +26,7 @@ var restartBtn;
 var itemSpawner;
 var powerupSpawner;
 var badItemSpawner;
+var scoreHolder;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -37,7 +38,7 @@ function collectItem(lady, item) {
 	//  Add 10 the the score
 	score += 10;
 	//  Update the score counter in the upper left
-	scoreText.text = 'Score: ' + score;
+	scoreText.text = score;
 	//  Update the gravity
 	faller.body.gravity.y = 100 + score;
 }
@@ -257,8 +258,12 @@ TheWalkingLady.Game.prototype = {
 		//  Enable physics on them
 		badItemGroup.enableBody = true;
 
+		//  Add the scoreholder
+		scoreHolder = this.add.sprite(3, 3, 'scoreHolder');
+		scoreHolder.scale.setTo(2);
+		scoreHolder.smoothed = false;
 		//  Add the score text in the upper left
-		scoreText = this.add.text(8, 8, 'Score: 0', {fontSize: '14px', fill: '#000'});
+		scoreText = this.add.text(80, 10, '0', {fontSize: '14px', fill: '#f0b411'});
 				
 		//  Add the main item spawn timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
 		//  which should be more than enough. The player should lose before it reaches 1000.
@@ -277,15 +282,15 @@ TheWalkingLady.Game.prototype = {
 		badItemSpawner.start();
 			
 		//  Render Hearts
-		heart1 = this.add.sprite(100, 10, 'spriteAtlas');
+		heart1 = this.add.sprite(154, 5, 'spriteAtlas');
 		heart1.frameName = 'spr_Heart';
 		heart1.scale.setTo(2, 2);
 		heart1.smoothed = false;
-		heart2 = this.add.sprite(130, 10, 'spriteAtlas');
+		heart2 = this.add.sprite(184, 5, 'spriteAtlas');
 		heart2.frameName = 'spr_Heart';
 		heart2.scale.setTo(2, 2);
 		heart2.smoothed = false;
-		heart3 = this.add.sprite(160, 10, 'spriteAtlas');
+		heart3 = this.add.sprite(214, 5, 'spriteAtlas');
 		heart3.frameName = 'spr_Heart';
 		heart3.scale.setTo(2, 2);
 		heart3.smoothed = false;

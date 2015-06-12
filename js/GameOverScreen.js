@@ -60,7 +60,7 @@ TheWalkingLady.GameOverScreen.prototype = {
 			this.state.start('MainMenu');
 		}, this);
 		
-		scoreText = this.add.text(10, 150, score);
+		scoreText = this.add.text(30, 150, score);
 		scoreText.font = 'monospace';
 		scoreText.fontSize = 100;
 		scoreText.fill = '#eab22a'
