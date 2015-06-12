@@ -6,6 +6,7 @@ var play;
 var help;
 var about;
 var menuMusicIsPlaying = false;
+var muted = false;
 
 TheWalkingLady.MainMenu.prototype = {
 	create: function () {
@@ -13,38 +14,30 @@ TheWalkingLady.MainMenu.prototype = {
 		menuBkgd = this.add.sprite(0, 0, 'mainMenu');
 		
 		//  Add play button
-		play = this.add.sprite(10, 230, 'buttonAtlas');
+		play = this.add.button(10, 230, 'buttonAtlas', startGame, this, 'btn_Play_Hover', 'btn_Play');
 		play.frameName = 'btn_Play';
-		//  Make it clickable
-		play.inputEnabled = true;
-		//  Run this function when you click it:
-		play.events.onInputDown.add(function() {
+		function startGame() {
 			//  Switch to the game state and stop the MainMenu music
 			this.state.start('Game');
 			backgroundSongs.stop('menuMusic');
-		}, this);
+		}
 		
 		//  Add how to play button
-		help = this.add.sprite(10, 335, 'buttonAtlas');
+		help = this.add.button(10, 335, 'buttonAtlas', helpPlayer, this, 'btn_HowToPlay_Hover', 'btn_HowToPlay');
 		help.frameName = 'btn_HowToPlay';
-		//  Make it clickable
-		help.inputEnabled = true;
-		//  Run this function when you click it:
-		help.events.onInputDown.add(function() {
+		function helpPlayer() {
 			//  Switch to the help state
 			this.state.start('Help');
-		}, this);
+		}
+		
 		
 		//  Add credits button
-		about = this.add.sprite(10, 415, 'buttonAtlas');
+		about = this.add.button(10, 415, 'buttonAtlas', showCreds, this, 'btn_Credits_Hover', 'btn_Credits');
 		about.frameName = 'btn_Credits';
-		//  Make it clickable
-		about.inputEnabled = true;
-		//  Run this function when you click it:
-		about.events.onInputDown.add(function() {
+		function showCreds() {
 			//  Switch to the about state
 			this.state.start('About');
-		}, this);
+		}
 	},
 	
 	update: function() {

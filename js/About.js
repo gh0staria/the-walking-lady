@@ -22,11 +22,7 @@ TheWalkingLady.About.prototype = {
 		credsLink.events.onInputDown.add(openLink, this);
 		
 		//  Add back button
-		var backButton = this.add.sprite(100, 410, 'buttonAtlas');
+		var backButton = this.add.button(100, 410, 'buttonAtlas', gotoMenu, this, 'btn_Back_Hover', 'btn_Back');
 		backButton.frameName = 'btn_Back';
-		//  Make it clickable
-		backButton.inputEnabled = true;
-		//  Make it so when you click on it, it runs the gotoMenu function
-		backButton.events.onInputDown.add(gotoMenu, this);
 	}
 };

@@ -19,12 +19,9 @@ TheWalkingLady.GameOverScreen.prototype = {
 		soundEffects.play('gameOver');
 		
 		//  Add the restart button
-		restartButton = this.add.sprite(100, 320, 'buttonAtlas');
+		restartButton = this.add.button(100, 320, 'buttonAtlas', restart, this, 'btn_Restart_Hover', 'btn_Restart');
 		restartButton.frameName = 'btn_Restart';
-		//  Make it clickable
-		restartButton.inputEnabled = true;
-		//  Run this function when we click it:
-		restartButton.events.onInputDown.add(function() {
+		function restart() {
 			//  Reset variables
 			score = 0;
 			speedNumber = 2;
@@ -34,15 +31,12 @@ TheWalkingLady.GameOverScreen.prototype = {
 			soundEffects.stop('gameOver');
 			//  Restart the game
 			this.state.start('Game');
-		}, this);
+		}
 		
 		//  Add the quit button
-		quitButton = this.add.sprite(100, 400, 'buttonAtlas');
+		quitButton = this.add.button(100, 400, 'buttonAtlas', quit, this, 'btn_Quit_Hover', 'btn_Quit');
 		quitButton.frameName = 'btn_Quit';
-		//  Make it clickable
-		quitButton.inputEnabled = true;
-		//  Run this function when we click it:
-		quitButton.events.onInputDown.add(function() {
+		function quit() {
 			//  Reset variables
 			score = 0;
 			speedNumber = 2;
@@ -58,7 +52,7 @@ TheWalkingLady.GameOverScreen.prototype = {
 			menuMusicIsPlaying = true;
 			//  Go to the main menu
 			this.state.start('MainMenu');
-		}, this);
+		}
 		
 		scoreText = this.add.text(30, 150, score);
 		scoreText.font = 'monospace';

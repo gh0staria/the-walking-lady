@@ -130,13 +130,13 @@ function pauseGame() {
 		//  Pause the physics engine
 		this.physics.arcade.isPaused = true;
 		//  Add the resume button
-		resumeBtn = this.add.button(100, 150, 'buttonAtlas', resumeGame, this);
+		resumeBtn = this.add.button(100, 150, 'buttonAtlas', resumeGame, this, 'btn_Resume_Hover', 'btn_Resume');
 		resumeBtn.frameName = 'btn_Resume';
 		//  Add the restart button
-		restartBtn = this.add.button(100, 235, 'buttonAtlas', restartGame, this);
+		restartBtn = this.add.button(100, 235, 'buttonAtlas', restartGame, this, 'btn_Restart_Hover', 'btn_Restart');
 		restartBtn.frameName = 'btn_Restart';
 		//  Add the quit button
-		quitBtn = this.add.button(100, 320, 'buttonAtlas', quitGame, this);
+		quitBtn = this.add.button(100, 320, 'buttonAtlas', quitGame, this, 'btn_Quit_Hover', 'btn_Quit');
 		quitBtn.frameName = 'btn_Quit';
 		//  Stop animations
 		lady.animations.stop();
