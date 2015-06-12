@@ -18,6 +18,14 @@ var lives = 3;
 var heart1;
 var heart2;
 var heart3;
+var pauseButton;
+var paused = false;
+var quitBtn;
+var resumeBtn;
+var restartBtn;
+var itemSpawner;
+var powerupSpawner;
+var badItemSpawner;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -115,6 +123,92 @@ function checkLives(floor, item) {
 	}
 }
 
+function pauseGame() {
+	//  Check if the game is paused or not
+	if (paused === false) {
+		//  Pause the physics engine
+		this.physics.arcade.isPaused = true;
+		//  Add the resume button
+		resumeBtn = this.add.button(100, 150, 'buttonAtlas', resumeGame, this);
+		resumeBtn.frameName = 'btn_Resume';
+		//  Add the restart button
+		restartBtn = this.add.button(100, 235, 'buttonAtlas', restartGame, this);
+		restartBtn.frameName = 'btn_Restart';
+		//  Add the quit button
+		quitBtn = this.add.button(100, 320, 'buttonAtlas', quitGame, this);
+		quitBtn.frameName = 'btn_Quit';
+		//  Stop animations
+		lady.animations.stop();
+		lady.frame = 7;
+		//  Pause the timers
+		itemSpawner.pause();
+		powerupSpawner.pause();
+		badItemSpawner.pause();
+		//  Set the variable
+		paused = true;
+	} else {
+		//  Destroy the buttons
+		resumeBtn.destroy();
+		restartBtn.destroy();
+		quitBtn.destroy();
+		//  Unpause the physics
+		this.physics.arcade.isPaused = false;
+		//  Unpause the timers
+		itemSpawner.resume();
+		powerupSpawner.resume();
+		badItemSpawner.resume();
+		//  Set the variable
+		paused = false;
+	}
+}
+function resumeGame() {
+	//  Destroy the buttons
+	resumeBtn.destroy();
+	restartBtn.destroy();
+	quitBtn.destroy();
+	//  Unpause the physics
+	this.physics.arcade.isPaused = false;
+	//  Unpause the timers
+	itemSpawner.resume();
+	powerupSpawner.resume();
+	badItemSpawner.resume();
+	//  Set the variable
+	paused = false;
+}
+
+function restartGame() {
+	//  Reset variables
+	score = 0;
+	speedNumber = 2;
+	lives = 3;
+	randArrayNumber = 2;
+	//  Restart the game
+	this.state.start('Game');
+	//  Set the variable
+	paused = false;
+}
+
+function quitGame() {
+	//  Reset variables
+	score = 0;
+	speedNumber = 2;
+	lives = 3;
+	randArrayNumber = 2;
+	//  Stop the game music
+	backgroundSongs.stop('gameMusic');
+	gameMusicIsPlaying = false;
+	//  Play the main menu music on a loop
+	backgroundSongs = this.add.audio('backgroundMusic');
+	backgroundSongs.addMarker('menuMusic', 0, 188.09, 1, true);
+	backgroundSongs.play('menuMusic');
+	//  Set the variable so we can check it later
+	menuMusicIsPlaying = true;
+	//  Go to the main menu
+	this.state.start('MainMenu');
+	//  Set the variable
+	paused = false;
+}
+
 TheWalkingLady.Game.prototype = {
 	create: function () {
 		//  Set the screen's background
@@ -165,16 +259,22 @@ TheWalkingLady.Game.prototype = {
 
 		//  Add the score text in the upper left
 		scoreText = this.add.text(8, 8, 'Score: 0', {fontSize: '14px', fill: '#000'});
-		
+				
 		//  Add the main item spawn timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
 		//  which should be more than enough. The player should lose before it reaches 1000.
-		this.time.events.repeat(itemSpawnInterval[randArrayNumber], 5000, createFaller, this);
+		itemSpawner = this.time.create(false);
+		itemSpawner.loop(itemSpawnInterval[randArrayNumber], createFaller, this);
+		itemSpawner.start();
 		
 		//  Add the powerup item spawn timer. It runs the createPowerup function every once in a while.
-		this.time.events.repeat(powerupSpawnInterval[randArrayNumber], 5000, createPowerup, this);
-		
+		powerupSpawner = this.time.create(false);
+		powerupSpawner.loop(powerupSpawnInterval[randArrayNumber], createPowerup, this)
+		powerupSpawner.start();
+
 		//  Add the bad item spawn timer. It runs the createBadItem function every once in a while.
-		this.time.events.repeat(badItemSpawnInterval[randArrayNumber], 5000, createBadItem, this);
+		badItemSpawner = this.time.create(false);
+		badItemSpawner.loop(badItemSpawnInterval[randArrayNumber], createBadItem, this)
+		badItemSpawner.start();
 			
 		//  Render Hearts
 		heart1 = this.add.sprite(100, 10, 'spriteAtlas');
@@ -189,55 +289,61 @@ TheWalkingLady.Game.prototype = {
 		heart3.frameName = 'spr_Heart';
 		heart3.scale.setTo(2, 2);
 		heart3.smoothed = false;
+		
+		//  Add pause button
+		pauseButton = this.add.button(374, 10, 'buttonAtlas', pauseGame, this);
+		pauseButton.frameName = 'btn_Pause';
 	},
 	
 	update: function () {
 		//  Reset the lady's movement
 		lady.body.velocity.x = 0;
-
-		//  Key events
-		cursors = this.input.keyboard.createCursorKeys();
-		//  Check the speed number
-		switch (speedNumber) {
-		case 1:
-			//  Slow speed controls
-			if (cursors.left.isDown) {
-				lady.body.velocity.x = -50;
-				lady.animations.play('left');
-			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 50;
-				lady.animations.play('right');
-			} else {
-				lady.animations.stop();
-				lady.frame = 7;
+		
+		if (paused === false) {
+			//  Key events
+			cursors = this.input.keyboard.createCursorKeys();
+			//  Check the speed number
+			switch (speedNumber) {
+			case 1:
+				//  Slow speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -50;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 50;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
+			case 2:
+				//  Normal speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -200;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 200;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
+			case 3:
+				//  Fast speed controls
+				if (cursors.left.isDown) {
+					lady.body.velocity.x = -400;
+					lady.animations.play('left');
+				} else if (cursors.right.isDown) {
+					lady.body.velocity.x = 400;
+					lady.animations.play('right');
+				} else {
+					lady.animations.stop();
+					lady.frame = 7;
+				}
+				break;
 			}
-			break;
-		case 2:
-			//  Normal speed controls
-			if (cursors.left.isDown) {
-				lady.body.velocity.x = -200;
-				lady.animations.play('left');
-			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 200;
-				lady.animations.play('right');
-			} else {
-				lady.animations.stop();
-				lady.frame = 7;
-			}
-			break;
-		case 3:
-			//  Fast speed controls
-			if (cursors.left.isDown) {
-				lady.body.velocity.x = -400;
-				lady.animations.play('left');
-			} else if (cursors.right.isDown) {
-				lady.body.velocity.x = 400;
-				lady.animations.play('right');
-			} else {
-				lady.animations.stop();
-				lady.frame = 7;
-			}
-			break;
 		}
 		
 		//  Collision checking
