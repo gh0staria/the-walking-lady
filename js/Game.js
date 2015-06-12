@@ -18,6 +18,7 @@ var lives = 3;
 var heart1;
 var heart2;
 var heart3;
+var lifeLostSound;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -83,46 +84,21 @@ function checkLives(floor, item) {
 	//  Check to see if player is dead
 	if (lives === 0) {
 		//  Start the game over state
+		lifeLostSound.play();
 		this.state.start('GameOverScreen');
 	}
 	if (lives === 2) {
 		//  Take away a heart
 		heart3.destroy();
+		lifeLostSound = this.add.sound('lostLifeSound');
+		lifeLostSound.play();
 	}
 	if (lives === 1) {
 		//  Take away a heart
 		heart2.destroy();
+		lifeLostSound.play();
 	}
 }
-
-/*function pauseGame() {
-	//  THIS WHOLE PAUSE THING IS BUGGY SO I'M DISABLING IT FOR NOW
-	//  Pause the game
-	this.game.paused = true;	
-	// Add the resume button
-	var resumeButton = this.add.sprite(w / 2, h / 2, 'resumeBtn');
-	resumeButton.anchor.set(0.5);
-	this.input.onDown.add(unpause, self);
-	
-	function unpause(event) {
-		// Calculate the corners of the menu
-		var x1 = w / 2 - 200 / 2, x2 = w / 2 + 200 / 2,
-			y1 = h / 2 - 100 / 2, y2 = h / 2 + 100 / 2;
-
-		// Check if the click was inside the menu
-		if (event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2) {
-			// Remove the menu and the label
-			resumeButton.destroy();
-			// Unpause the game
-			this.game.paused = false;
-		}
-		//  Add the restart button
-		//this.add.sprite(100, 210, 'restartBtn');
-
-		//  Add the quit button
-		//this.add.sprite(100, 320, 'quitBtn');
-	}
-}*/
 
 TheWalkingLady.Game.prototype = {
 	create: function () {
@@ -185,14 +161,6 @@ TheWalkingLady.Game.prototype = {
 		heart1 = this.add.sprite(100, 10, 'heart');
 		heart2 = this.add.sprite(130, 10, 'heart');
 		heart3 = this.add.sprite(160, 10, 'heart');
-		
-		/*//  Add pause button, commented out b/c pause is buggy
-		var pauseButton = this.add.sprite(372, 3, 'pauseBtn');
-		//  Make it clickable
-		pauseButton.inputEnabled = true;
-		//  Make it so when you click on it, it runs the function pauseGame
-		//pauseButton.events.onInputDown.add(pauseGame, this);*/
-		
 	},
 	
 	update: function () {
