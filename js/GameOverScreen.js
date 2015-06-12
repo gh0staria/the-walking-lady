@@ -1,7 +1,7 @@
 TheWalkingLady.GameOverScreen = function (game) {};
 
-//  Set up our variables
-var gameOverSoundEffect;
+var restartButton;
+var quitButton;
 
 TheWalkingLady.GameOverScreen.prototype = {
 	create: function () {
@@ -9,15 +9,17 @@ TheWalkingLady.GameOverScreen.prototype = {
 		this.stage.backgroundColor = '#ffedb7';
 		
 		//  Stop the game music
-		gameMusic.stop();
+		backgroundSongs.stop('gameMusic');
 		//  Set the variable so we can check it later
 		gameMusicIsPlaying = false;
 		//  Play game over sound
-		gameOverSoundEffect = this.add.sound('gameOverSound');
-		gameOverSoundEffect.play();
+		soundEffects = this.add.sound('soundEffects');
+		soundEffects.addMarker('gameOver', .72, 3.6, 1, false);
+		soundEffects.play('gameOver');
 		
 		//  Add the restart button
-		var restartButton = this.add.sprite(100, 250, 'restartBtn');
+		restartButton = this.add.sprite(100, 250, 'buttonAtlas');
+		restartButton.frameName = 'btn_Restart';
 		//  Make it clickable
 		restartButton.inputEnabled = true;
 		//  Run this function when we click it:
@@ -28,13 +30,14 @@ TheWalkingLady.GameOverScreen.prototype = {
 			lives = 3;
 			randArrayNumber = 2;
 			//  Cut off the sound effect if it's still playing
-			gameOverSoundEffect.stop();
+			soundEffects.stop('gameOver');
 			//  Restart the game
 			this.state.start('Game');
 		}, this);
 		
 		//  Add the quit button
-		var quitButton = this.add.sprite(100, 360, 'quitBtn');
+		quitButton = this.add.sprite(100, 360, 'buttonAtlas');
+		quitButton.frameName = 'btn_Quit';
 		//  Make it clickable
 		quitButton.inputEnabled = true;
 		//  Run this function when we click it:
@@ -45,10 +48,11 @@ TheWalkingLady.GameOverScreen.prototype = {
 			lives = 3;
 			randArrayNumber = 2;
 			//  Cut off the sound effect if it's still playing
-			gameOverSoundEffect.stop();
+			soundEffects.stop('gameOver');
 			//  Play the main menu music on a loop
-			menuMusic.play();
-			menuMusic.loop = true;
+			backgroundSongs = this.add.audio('backgroundMusic');
+			backgroundSongs.addMarker('menuMusic', 0, 188.09, 1, true);
+			backgroundSongs.play('menuMusic');
 			//  Set the variable so we can check it later
 			menuMusicIsPlaying = true;
 			

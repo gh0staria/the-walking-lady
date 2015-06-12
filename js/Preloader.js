@@ -11,12 +11,12 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.setPreloadSprite(this.preloadBar);
 		
 		//  Load sprites
-		this.load.spritesheet('lady', 'assets/sh_Lady.png', 20, 31);
-		this.load.image('floor', 'assets/spr_Floor.png');
-		this.load.atlasJSONHash('spriteAtlas', 'assets/SpritesSpritesheet.png', 'assets/SpritesSpritesheet.json');
+		this.load.spritesheet('lady', 'assets/sprites/sh_Lady.png', 20, 31);
+		this.load.image('floor', 'assets/sprites/spr_Floor.png');
+		this.load.atlasJSONHash('spriteAtlas', 'assets/sprites/SpritesSpritesheet.png', 'assets/sprites/SpritesSpritesheet.json');
 		
 		// Load buttons
-		this.load.atlasJSONHash('buttonAtlas', 'assets/ButtonSpritesheet.png', 'assets/ButtonSpritesheet.json');
+		this.load.atlasJSONHash('buttonAtlas', 'assets/sprites/ButtonSpritesheet.png', 'assets/sprites/ButtonSpritesheet.json');
 		
 		//  Load Backgrounds
 		this.load.image('creditsMenu', 'assets/backgrounds/bkgd_CreditsMenu.png');
@@ -24,23 +24,18 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.image('mainMenu', 'assets/backgrounds/bkgd_MainMenu.png');
 		
 		//  Load music/sound effects
-		this.load.audio('titleMusic', ['assets/audio/music_Title.ogg', 'assets/audio/music_Title.m4a']);
-		this.load.audio('gameMusic', ['assets/audio/music_Gameplay.ogg', 'assets/audio/music_Gameplay.m4a']);
-		this.load.audio('gameOverSound', 'assets/audio/sound_GameOver.ogg');
-		this.load.audio('collectItemSound', 'assets/audio/sound_CollectItem.ogg');
-		this.load.audio('powerupSound', 'assets/audio/sound_Powerup.ogg');
-		this.load.audio('badItemSound', 'assets/audio/sound_BadItem.ogg');
-		this.load.audio('lostLifeSound', 'assets/audio/sound_LostLife.ogg');
+		this.load.audio('backgroundMusic', 'assets/audio/backgroundSongs.ogg', 'assets/audio/backgroundSongs.mp3');
+		this.load.audio('soundEffects', 'assets/audio/soundEffects.ogg', 'assets/audio/soundEffects.mp3');
 	},
 
 	create: function () {
 		//	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes.
-		this.preloadBar.cropEnabled = false;
+		//this.preloadBar.cropEnabled = false;
 	},
 
 	update: function () {
 		//	Basically this will wait for our audio file to be decoded before proceeding to the MainMenu.
-		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false) {
+		if (this.cache.isSoundDecoded('backgroundMusic') && this.ready == false) {
 			this.ready = true;
 			this.state.start('MainMenu');
 		}

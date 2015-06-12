@@ -5,7 +5,6 @@ var menuBkgd
 var play;
 var help;
 var about;
-var menuMusic;
 var menuMusicIsPlaying = false;
 
 TheWalkingLady.MainMenu.prototype = {
@@ -22,7 +21,7 @@ TheWalkingLady.MainMenu.prototype = {
 		play.events.onInputDown.add(function() {
 			//  Switch to the game state and stop the MainMenu music
 			this.state.start('Game');
-			menuMusic.stop();
+			backgroundSongs.stop('menuMusic');
 		}, this);
 		
 		//  Add how to play button
@@ -52,9 +51,9 @@ TheWalkingLady.MainMenu.prototype = {
 		//  Check if music is playing
 		if (menuMusicIsPlaying === false) {
 			//  If it isn't, play the music on a loop
-			menuMusic = this.add.audio('titleMusic');
-			menuMusic.loop = true;
-			menuMusic.play();
+			backgroundSongs = this.add.audio('backgroundMusic');
+			backgroundSongs.addMarker('menuMusic', 0, 188.09, 1, true);
+			backgroundSongs.play('menuMusic');
 			//  And set the variable to true so later we can check if it's playing
 			menuMusicIsPlaying = true;
 		}

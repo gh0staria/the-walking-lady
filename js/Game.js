@@ -5,8 +5,8 @@ TheWalkingLady.Game = function (game) {};
 var score = 0;
 var scoreText;
 var faller;
+var soundEffects;
 var gameMusicIsPlaying = false;
-var collectSound;
 var powerup;
 //  speedNumber controls the walk speed. 1 = slow, 2 = normal, 3 = fast.
 var speedNumber = 2;
@@ -18,12 +18,12 @@ var lives = 3;
 var heart1;
 var heart2;
 var heart3;
-var lifeLostSound;
 
 function collectItem(lady, item) {
 	//  Play a sound
-	collectSound = this.add.audio('collectItemSound');
-	collectSound.play();
+	soundEffects = this.add.audio('soundEffects');
+	soundEffects.addMarker('collectItem', .42, .2, 1, false);
+	soundEffects.play('collectItem');
 	//  Destroy the item
 	item.kill();
 	//  Add 10 the the score
@@ -94,19 +94,24 @@ function checkLives(floor, item) {
 	//  Check to see if player is dead
 	if (lives === 0) {
 		//  Start the game over state
-		lifeLostSound.play();
+		soundEffects = this.add.audio('soundEffects');
+		soundEffects.addMarker('lifeLost', 4.42, .1, 1, false);
+		soundEffects.play('lifeLost');
 		this.state.start('GameOverScreen', true);
 	}
 	if (lives === 2) {
 		//  Take away a heart
 		heart3.destroy();
-		lifeLostSound = this.add.sound('lostLifeSound');
-		lifeLostSound.play();
+		soundEffects = this.add.audio('soundEffects');
+		soundEffects.addMarker('lifeLost', 4.42, .1, 1, false);
+		soundEffects.play('lifeLost');
 	}
 	if (lives === 1) {
 		//  Take away a heart
 		heart2.destroy();
-		lifeLostSound.play();
+		soundEffects = this.add.audio('soundEffects');
+		soundEffects.addMarker('lifeLost', 4.42, .1, 1, false);
+		soundEffects.play('lifeLost');
 	}
 }
 
@@ -252,8 +257,9 @@ TheWalkingLady.Game.prototype = {
 			//  Destroy the powerup
 			powerupCaught.kill();
 			//  Play the powerup sound
-			powerupSound = this.add.audio('powerupSound');
-			powerupSound.play();
+			soundEffects = this.add.audio('soundEffects');
+			soundEffects.addMarker('powerupSound', 4.62, .1, 1, false);
+			soundEffects.play('powerupSound');
 			//  Increase the speed
 			speedNumber = 3;
 			//  Wait 6 seconds, then reset the speed back to normal
@@ -273,8 +279,9 @@ TheWalkingLady.Game.prototype = {
 			//  Destroy the bad item
 			badItemCaught.kill();
 			//  Play the bad item sound
-			badItemSound = this.add.audio('badItemSound');
-			badItemSound.play();
+			soundEffects = this.add.audio('soundEffects');
+			soundEffects.addMarker('badItemSound', 0, .3, 1, false);
+			soundEffects.play('badItemSound');
 			//  Decrease the speed
 			speedNumber = 1;
 			//  Wait 6 seconds, then reset the speed back to normal
@@ -289,9 +296,9 @@ TheWalkingLady.Game.prototype = {
 		//  Check if music isn't already playing
 		if (gameMusicIsPlaying === false) {
 			// Play the music on a loop
-			gameMusic = this.add.audio('gameMusic');
-			gameMusic.loop = true;
-			gameMusic.play();
+			backgroundSongs = this.add.audio('backgroundMusic');
+			backgroundSongs.addMarker('gameMusic', 189, 207.7, 1, true);
+			backgroundSongs.play('gameMusic');
 			//  Set the variable so we can check it later
 			gameMusicIsPlaying = true;
 		}
