@@ -1,7 +1,7 @@
 TheWalkingLady.MainMenu = function (game) {};
 
 //  Set variables that need to be used
-var menuTitle;
+var menuBkgd
 var play;
 var help;
 var about;
@@ -10,14 +10,11 @@ var menuMusicIsPlaying = false;
 
 TheWalkingLady.MainMenu.prototype = {
 	create: function () {
-		//  Set the screen's background color
-		this.stage.backgroundColor = '#ffedb7';
-
-		//  Add game title image
-		menuTitle = this.add.sprite(0, 0, 'gameTitle');
+		//  Set the screen's background
+		menuBkgd = this.add.sprite(0, 0, 'mainMenu');
 		
 		//  Add play button
-		play = this.add.sprite(100, 180, 'playBtn');
+		play = this.add.sprite(10, 230, 'playBtn');
 		//  Make it clickable
 		play.inputEnabled = true;
 		//  Run this function when you click it:
@@ -27,8 +24,8 @@ TheWalkingLady.MainMenu.prototype = {
 			menuMusic.stop();
 		}, this);
 		
-		//  Add help button
-		help = this.add.sprite(100, 285, 'helpBtn');
+		//  Add how to play button
+		help = this.add.sprite(10, 335, 'helpBtn');
 		//  Make it clickable
 		help.inputEnabled = true;
 		//  Run this function when you click it:
@@ -37,8 +34,8 @@ TheWalkingLady.MainMenu.prototype = {
 			this.state.start('Help');
 		}, this);
 		
-		//  Add about button
-		about = this.add.sprite(100, 390, 'aboutBtn');
+		//  Add credits button
+		about = this.add.sprite(10, 415, 'aboutBtn');
 		//  Make it clickable
 		about.inputEnabled = true;
 		//  Run this function when you click it:

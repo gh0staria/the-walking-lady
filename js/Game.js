@@ -36,9 +36,9 @@ function collectItem(lady, item) {
 
 function createFaller() {
 	//  Set up an array with all the different types of items we're going to choose from
-	var itemsArray = ['potion', 'cheese', 'bread', 'coin', 'gem'];
+	var itemsArray = ['bagOfFlour', 'cupcake', 'donut', 'muffin', 'pretzel', 'roll'];
 	//  Add the item at a random position
-	faller = this.add.sprite(Math.floor(Math.random() * 366), -50, itemsArray[Math.floor(Math.random() * 5)]);
+	faller = this.add.sprite(Math.floor(Math.random() * 366), -50, itemsArray[Math.floor(Math.random() * 6)]);
 	//  Start physics on the item
 	this.physics.enable(faller, Phaser.Physics.ARCADE);
 	//  Add the item to the 'items' group
@@ -47,6 +47,9 @@ function createFaller() {
 	faller.body.gravity.y = 100 + score;
 	//  Randomize the interval
 	randArrayNumber = Math.floor(Math.random() * 2);
+	//  Set the scale and smoothing
+	faller.scale.setTo(2, 2);
+	faller.smoothed = false;
 }
 
 function createPowerup() {
@@ -60,6 +63,8 @@ function createPowerup() {
 	powerup.body.gravity.y = 300;
 	//  Randomize the interval
 	randArrayNumber = Math.floor(Math.random() * 2);
+	powerup.scale.setTo(2, 2);
+	powerup.smoothed = false;
 }
 
 function createBadItem() {
@@ -73,7 +78,8 @@ function createBadItem() {
 	badItem.body.gravity.y = 400;
 	//  Randomize the interval
 	randArrayNumber = Math.floor(Math.random() * 2);
-	
+	badItem.scale.setTo(2, 2);
+	badItem.smoothed = false;
 }
 
 function checkLives(floor, item) {
@@ -113,6 +119,9 @@ TheWalkingLady.Game.prototype = {
 		this.physics.arcade.enable(floor);
 		//  Make the floor a static object so it doesn't fall when the lady is on it
 		floor.body.immovable = true;
+		//  Double the floor size and keep it pixel-y
+		floor.scale.setTo(2, 2);
+		floor.smoothed = false;
 
 		//  Add the lady
 		lady = this.add.sprite(this.world.width / 2, this.world.height - 94, 'lady');
@@ -159,8 +168,14 @@ TheWalkingLady.Game.prototype = {
 			
 		//  Render Hearts
 		heart1 = this.add.sprite(100, 10, 'heart');
+		heart1.scale.setTo(2, 2);
+		heart1.smoothed = false;
 		heart2 = this.add.sprite(130, 10, 'heart');
+		heart2.scale.setTo(2, 2);
+		heart2.smoothed = false;
 		heart3 = this.add.sprite(160, 10, 'heart');
+		heart3.scale.setTo(2, 2);
+		heart3.smoothed = false;
 	},
 	
 	update: function () {

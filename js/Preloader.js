@@ -6,35 +6,37 @@ TheWalkingLady.Preloader = function (game) {
 TheWalkingLady.Preloader.prototype = {
 	preload: function () {
 		//	Set preloader bar stuff
-		this.preloadBar = this.add.sprite(100, 100, 'preloaderBar');
+		this.preloaderBackground = this.add.sprite(0, 0, 'preloaderBackground');
+		this.preloadBar = this.add.sprite(100, 200, 'preloaderBar');
 		this.load.setPreloadSprite(this.preloadBar);
-
-		//	Load basic sprites
-		this.load.spritesheet('lady', 'assets/imgs/player_lady.png', 20, 31);
-		this.load.image('floor', 'assets/imgs/sprite_floor.png');
 		
-		//  Load falling items
-		this.load.image('potion', 'assets/imgs/item_potion.png');
-		this.load.image('cheese', 'assets/imgs/item_cheese.png');
-		this.load.image('bread', 'assets/imgs/item_bread.png');
-		this.load.image('coin', 'assets/imgs/item_coin.png');
-		this.load.image('gem', 'assets/imgs/item_gem.png');
+		//  Load sprites
+		this.load.spritesheet('lady', 'assets/sprites/sh_Lady.png', 20, 31);
+		this.load.image('floor', 'assets/sprites/spr_Floor.png');
+		this.load.image('cupcake', 'assets/sprites/spr_Cupcake.png');
+		this.load.image('donut', 'assets/sprites/spr_Donut.png');
+		this.load.image('muffin', 'assets/sprites/spr_Muffin.png');
+		this.load.image('pretzel', 'assets/sprites/spr_Pretzel.png');
+		this.load.image('roll', 'assets/sprites/spr_Roll.png');
+		this.load.image('bagOfFlour', 'assets/sprites/spr_BagOfFlour.png');
+		this.load.image('powerup', 'assets/sprites/spr_Powerup.png');
+		this.load.image('badItem', 'assets/sprites/spr_BadItem.png');
+		this.load.image('heart', 'assets/sprites/spr_Heart.png');
 		
-		//  Load powerups/bad items
-		this.load.image('powerup', 'assets/imgs/powerup_speed.png');
-		this.load.image('badItem', 'assets/imgs/powerup_slow.png');
+		// Load buttons
+		this.load.image('playBtn', 'assets/buttons/btn_Play.png');
+		this.load.image('helpBtn', 'assets/buttons/btn_HowToPlay.png');
+		this.load.image('aboutBtn', 'assets/buttons/btn_Credits.png');
+		this.load.image('quitBtn', 'assets/buttons/btn_Quit.png');
+		this.load.image('restartBtn', 'assets/buttons/btn_Restart.png');
+		//this.load.image('resumeBtn', 'assets/buttons/btn_Resume.png');
+		this.load.image('gotoMenuBtn', 'assets/buttons/btn_Back.png');
+		this.load.image('pauseBtn', 'assets/buttons/btn_Pause.png');
 		
-		// Load menu buttons/images
-		this.load.image('gameTitle', 'assets/buttons/placeholder_game_title.png');
-		this.load.image('playBtn', 'assets/buttons/placeholder_play_button.png');
-		this.load.image('helpBtn', 'assets/buttons/placeholder_help_button.png');
-		this.load.image('aboutBtn', 'assets/buttons/placeholder_about_button.png');
-		this.load.image('quitBtn', 'assets/buttons/placeholder_quit_button.png');
-		this.load.image('restartBtn', 'assets/buttons/placeholder_restart_button.png');
-		this.load.image('resumeBtn', 'assets/buttons/placeholder_resume_button.png');
-		this.load.image('gotoMenuBtn', 'assets/buttons/placeholder_goto_menu_button.png');
-		this.load.image('pauseBtn', 'assets/buttons/placeholder_pause_button.png');
-		this.load.image('heart', 'assets/buttons/placeholder_pause_button.png');
+		//  Load Backgrounds
+		this.load.image('creditsMenu', 'assets/backgrounds/bkgd_CreditsMenu.png');
+		this.load.image('howToPlayMenu', 'assets/backgrounds/bkgd_HowToPlayMenu.png');
+		this.load.image('mainMenu', 'assets/backgrounds/bkgd_MainMenu.png');
 		
 		//  Load music/sound effects
 		this.load.audio('titleMusic', ['assets/audio/music_Title.ogg', 'assets/audio/music_Title.m4a']);
