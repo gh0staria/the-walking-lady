@@ -18,6 +18,7 @@ var lives = 3;
 var heart1;
 var heart2;
 var heart3;
+var pauseButton;
 
 function collectItem(lady, item) {
 	//  Play a sound
@@ -115,6 +116,10 @@ function checkLives(floor, item) {
 	}
 }
 
+function pauseGame() {
+	console.log('game paused');
+}
+
 TheWalkingLady.Game.prototype = {
 	create: function () {
 		//  Set the screen's background color
@@ -188,6 +193,10 @@ TheWalkingLady.Game.prototype = {
 		heart3.frameName = 'spr_Heart';
 		heart3.scale.setTo(2, 2);
 		heart3.smoothed = false;
+		
+		//  Add pause button
+		pauseButton = this.add.button(374, 10, 'buttonAtlas', pauseGame, this);
+		pauseButton.frameName = 'btn_Pause';
 	},
 	
 	update: function () {
