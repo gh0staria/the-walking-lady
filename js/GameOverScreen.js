@@ -44,6 +44,7 @@ TheWalkingLady.GameOverScreen.prototype = {
 			speedNumber = 2;
 			badItemSpawnInterval = 15;
 			score = 0;
+			lives = 3;
 			//  Cut off the sound effect if it's still playing
 			gameOverSoundEffect.stop();
 			//  Play the main menu music on a loop
