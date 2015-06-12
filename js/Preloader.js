@@ -43,6 +43,7 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.audio('collectItemSound', 'assets/audio/sound_CollectItem.ogg');
 		this.load.audio('powerupSound', 'assets/audio/sound_Powerup.ogg');
 		this.load.audio('badItemSound', 'assets/audio/sound_BadItem.ogg');
+		this.load.audio('lostLifeSound', 'assets/audio/sound_LostLife.ogg');
 	},
 
 	create: function () {

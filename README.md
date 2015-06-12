@@ -16,7 +16,7 @@ Graphics by [Simon "Punstar" Heimersson](https://instagram.com/simonthepunstar/)
 
 [Collect powerup sound and collect bad item sound](http://opengameart.org/content/100-plus-game-sound-effects-wavoggm4a) by [Damaged Panda](http://opengameart.org/users/damaged-panda) are liscensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 
-[Game Over sound effect](http://opengameart.org/content/8-bit-sound-effects-library) by [Little Robot Sound Factory](http://www.littlerobotsoundfactory.com/) is liscensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0[/)
+[Game Over sound effect and life lost sound effect](http://opengameart.org/content/8-bit-sound-effects-library) by [Little Robot Sound Factory](http://www.littlerobotsoundfactory.com/) is liscensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0[/)
 
 [Collect item sound effect](http://opengameart.org/content/10-8bit-coin-sounds) is in the Public Domain.
 
