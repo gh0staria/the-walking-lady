@@ -11,27 +11,12 @@ TheWalkingLady.Preloader.prototype = {
 		this.load.setPreloadSprite(this.preloadBar);
 		
 		//  Load sprites
-		this.load.spritesheet('lady', 'assets/sprites/sh_Lady.png', 20, 31);
-		this.load.image('floor', 'assets/sprites/spr_Floor.png');
-		this.load.image('cupcake', 'assets/sprites/spr_Cupcake.png');
-		this.load.image('donut', 'assets/sprites/spr_Donut.png');
-		this.load.image('muffin', 'assets/sprites/spr_Muffin.png');
-		this.load.image('pretzel', 'assets/sprites/spr_Pretzel.png');
-		this.load.image('roll', 'assets/sprites/spr_Roll.png');
-		this.load.image('bagOfFlour', 'assets/sprites/spr_BagOfFlour.png');
-		this.load.image('powerup', 'assets/sprites/spr_Powerup.png');
-		this.load.image('badItem', 'assets/sprites/spr_BadItem.png');
-		this.load.image('heart', 'assets/sprites/spr_Heart.png');
+		this.load.spritesheet('lady', 'assets/sh_Lady.png', 20, 31);
+		this.load.image('floor', 'assets/spr_Floor.png');
+		this.load.atlasJSONHash('spriteAtlas', 'assets/SpritesSpritesheet.png', 'assets/SpritesSpritesheet.json');
 		
 		// Load buttons
-		this.load.image('playBtn', 'assets/buttons/btn_Play.png');
-		this.load.image('helpBtn', 'assets/buttons/btn_HowToPlay.png');
-		this.load.image('aboutBtn', 'assets/buttons/btn_Credits.png');
-		this.load.image('quitBtn', 'assets/buttons/btn_Quit.png');
-		this.load.image('restartBtn', 'assets/buttons/btn_Restart.png');
-		//this.load.image('resumeBtn', 'assets/buttons/btn_Resume.png');
-		this.load.image('gotoMenuBtn', 'assets/buttons/btn_Back.png');
-		this.load.image('pauseBtn', 'assets/buttons/btn_Pause.png');
+		this.load.atlasJSONHash('buttonAtlas', 'assets/ButtonSpritesheet.png', 'assets/ButtonSpritesheet.json');
 		
 		//  Load Backgrounds
 		this.load.image('creditsMenu', 'assets/backgrounds/bkgd_CreditsMenu.png');

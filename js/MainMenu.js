@@ -14,7 +14,8 @@ TheWalkingLady.MainMenu.prototype = {
 		menuBkgd = this.add.sprite(0, 0, 'mainMenu');
 		
 		//  Add play button
-		play = this.add.sprite(10, 230, 'playBtn');
+		play = this.add.sprite(10, 230, 'buttonAtlas');
+		play.frameName = 'btn_Play';
 		//  Make it clickable
 		play.inputEnabled = true;
 		//  Run this function when you click it:
@@ -25,7 +26,8 @@ TheWalkingLady.MainMenu.prototype = {
 		}, this);
 		
 		//  Add how to play button
-		help = this.add.sprite(10, 335, 'helpBtn');
+		help = this.add.sprite(10, 335, 'buttonAtlas');
+		help.frameName = 'btn_HowToPlay';
 		//  Make it clickable
 		help.inputEnabled = true;
 		//  Run this function when you click it:
@@ -35,7 +37,8 @@ TheWalkingLady.MainMenu.prototype = {
 		}, this);
 		
 		//  Add credits button
-		about = this.add.sprite(10, 415, 'aboutBtn');
+		about = this.add.sprite(10, 415, 'buttonAtlas');
+		about.frameName = 'btn_Credits';
 		//  Make it clickable
 		about.inputEnabled = true;
 		//  Run this function when you click it:

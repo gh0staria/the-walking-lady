@@ -36,9 +36,11 @@ function collectItem(lady, item) {
 
 function createFaller() {
 	//  Set up an array with all the different types of items we're going to choose from
-	var itemsArray = ['bagOfFlour', 'cupcake', 'donut', 'muffin', 'pretzel', 'roll'];
 	//  Add the item at a random position
-	faller = this.add.sprite(Math.floor(Math.random() * 366), -50, itemsArray[Math.floor(Math.random() * 6)]);
+	faller = this.add.sprite(Math.floor(Math.random() * 366), -50, 'spriteAtlas');
+	var itemsArray = ['spr_BagOfFlour', 'spr_Cupcake', 'spr_Donut', 'spr_Muffin', 'spr_Pretzel', 'spr_Roll'];
+	faller.frameName = itemsArray[Math.floor(Math.random() * 6)];
+	
 	//  Start physics on the item
 	this.physics.enable(faller, Phaser.Physics.ARCADE);
 	//  Add the item to the 'items' group
@@ -54,7 +56,8 @@ function createFaller() {
 
 function createPowerup() {
 	//  Add the powerup at a random position
-	powerup = this.add.sprite(Math.floor(Math.random() * 366), -50, 'powerup');
+	powerup = this.add.sprite(Math.floor(Math.random() * 366), -50, 'spriteAtlas');
+	powerup.frameName = 'spr_Powerup';
 	//  Start physics on the item
 	this.physics.enable(powerup, Phaser.Physics.ARCADE);
 	//  Add the item to the powerupGroup group
@@ -69,7 +72,8 @@ function createPowerup() {
 
 function createBadItem() {
 	//  Add the bad item at a random positon
-	badItem = this.add.sprite(Math.floor(Math.random() * 366), -50, 'badItem');
+	badItem = this.add.sprite(Math.floor(Math.random() * 366), -50, 'spriteAtlas');
+	badItem.frameName = 'spr_BadItem';
 	//  Start physics on it
 	this.physics.enable(badItem, Phaser.Physics.ARCADE);
 	//  Add the item to the badItemGroup group
@@ -167,13 +171,16 @@ TheWalkingLady.Game.prototype = {
 		this.time.events.repeat(badItemSpawnInterval[randArrayNumber], 5000, createBadItem, this);
 			
 		//  Render Hearts
-		heart1 = this.add.sprite(100, 10, 'heart');
+		heart1 = this.add.sprite(100, 10, 'spriteAtlas');
+		heart1.frameName = 'spr_Heart';
 		heart1.scale.setTo(2, 2);
 		heart1.smoothed = false;
-		heart2 = this.add.sprite(130, 10, 'heart');
+		heart2 = this.add.sprite(130, 10, 'spriteAtlas');
+		heart2.frameName = 'spr_Heart';
 		heart2.scale.setTo(2, 2);
 		heart2.smoothed = false;
-		heart3 = this.add.sprite(160, 10, 'heart');
+		heart3 = this.add.sprite(160, 10, 'spriteAtlas');
+		heart3.frameName = 'spr_Heart';
 		heart3.scale.setTo(2, 2);
 		heart3.smoothed = false;
 	},

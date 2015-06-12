@@ -13,7 +13,8 @@ TheWalkingLady.Help.prototype = {
 		howToPlayBackground = this.add.sprite(0, 0, 'howToPlayMenu');
 		
 		//  Add the back button
-		var backButton = this.add.sprite(100, 410, 'gotoMenuBtn');
+		var backButton = this.add.sprite(100, 410, 'buttonAtlas');
+		backButton.frameName = 'btn_Back';
 		//  Make it clickable
 		backButton.inputEnabled = true;
 		//  Make it so when you click on it, it runs the gotoMenu function
