@@ -12,7 +12,7 @@ var powerup;
 var speedNumber = 2;
 var powerupSpawnInterval = [8000, 9000, 13000];
 var badItemSpawnInterval = [6000, 11000, 15000];
-var itemSpawnInterval = [1000, 2000, 3000];
+var itemSpawnInterval = [1500, 2000, 3000];
 var randArrayNumber = 2;
 var lives = 3;
 var heart1;
@@ -75,7 +75,7 @@ function createBadItem() {
 	//  Add the item to the badItemGroup group
 	badItemGroup.add(badItem);
 	//  Set the gravity for the item
-	badItem.body.gravity.y = 400;
+	badItem.body.gravity.y = 300;
 	//  Randomize the interval
 	randArrayNumber = Math.floor(Math.random() * 2);
 	badItem.scale.setTo(2, 2);
@@ -91,7 +91,7 @@ function checkLives(floor, item) {
 	if (lives === 0) {
 		//  Start the game over state
 		lifeLostSound.play();
-		this.state.start('GameOverScreen');
+		this.state.start('GameOverScreen', true);
 	}
 	if (lives === 2) {
 		//  Take away a heart
@@ -158,13 +158,13 @@ TheWalkingLady.Game.prototype = {
 		
 		//  Add the main item spawn timer. This runs the createFaller function every 2 seconds. It only repeats 1000 times,
 		//  which should be more than enough. The player should lose before it reaches 1000.
-		this.time.events.repeat(itemSpawnInterval[randArrayNumber], 1000, createFaller, this);
+		this.time.events.repeat(itemSpawnInterval[randArrayNumber], 5000, createFaller, this);
 		
 		//  Add the powerup item spawn timer. It runs the createPowerup function every once in a while.
-		this.time.events.repeat(powerupSpawnInterval[randArrayNumber], 1000, createPowerup, this);
+		this.time.events.repeat(powerupSpawnInterval[randArrayNumber], 5000, createPowerup, this);
 		
 		//  Add the bad item spawn timer. It runs the createBadItem function every once in a while.
-		this.time.events.repeat(badItemSpawnInterval[randArrayNumber], 1000, createBadItem, this);
+		this.time.events.repeat(badItemSpawnInterval[randArrayNumber], 5000, createBadItem, this);
 			
 		//  Render Hearts
 		heart1 = this.add.sprite(100, 10, 'heart');
