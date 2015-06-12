@@ -55,7 +55,6 @@ TheWalkingLady.GameOverScreen.prototype = {
 			backgroundSongs.play('menuMusic');
 			//  Set the variable so we can check it later
 			menuMusicIsPlaying = true;
-			
 			//  Go to the main menu
 			this.state.start('MainMenu');
 		}, this);
