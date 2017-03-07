@@ -1,7 +1,5 @@
-
 TheWalkingLady.Game = function (game) {};
 
-//  Set up our variables
 var score = 0;
 var scoreText;
 var faller;
