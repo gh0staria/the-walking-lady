@@ -11,12 +11,69 @@
 		<script src="js/GameOverScreen.js"></script>
 		<script src="js/Help.js"></script>
 		<script src="js/About.js"></script>
+
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Bitter|Montserrat" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="gamepage.css">
 	</head>
 	<body>
-		<div id="gameContainer"></div>
+		<div class="container">
+			<div class="row">
+				<a href="http://lizgw.github.io/projects/"><span class="glyphicon glyphicon-menu-left"></span>View all projects</a>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="gameContainer"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<h1>The Walking Lady</h1>
+					<p>I've finally completed my first game! It's not perfect, but it was a fun challenge and an amazing thing to see go from concept to completed game. I learned a lot and I'm looking forward to making more games! Thanks for playing!</p>
+					<h2>How to Play</h2>
+					<p>Use the arrow keys to move and collect the falling items. Every time an item hits the ground you lose a life. Watch out for powerups and bad items!</p>
+					<h3>A Note About Internet Explorer</h3>
+					<p>This game will not work in IE: it stays frozen on the loading screen forever. This is due to the way that IE processes audio files. If you really want to play, please consider upgrading to a modern browser!</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Details</h2>
+						<table class="table table-responsive">
+							<tbody>
+								<tr>
+									<td><strong>Language(s):</strong></td>
+									<td>JavaScript</td>
+								</tr>
+								<tr>
+									<td><strong>Engine:</strong></td>
+									<td>Phaser</td>
+								</tr>
+								<tr>
+									<td><strong>Mobile Friendly:</strong></td>
+									<td>No</td>
+								</tr>
+								<tr>
+									<td><strong>Credits:</strong></td>
+									<td><a href="https://github.com/lizgw/the-walking-lady/blob/master/README.md#credits" target="_blank">Click here</a></td>
+								</tr>
+								<tr>
+									<td><strong>Repository:</strong></td>
+									<td><a href="https://github.com/lizgw/the-walking-lady" target="">github.com/lizgw/the-walking-lady</a></td>
+								</tr>
+								<tr>
+									<td><strong>Published:</strong></td>
+									<td>6/12/15</td>
+								</tr>
+								<tr>
+									<td><strong>Last Updated:</strong></td>
+									<td>3/9/17</td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript">
 			window.onload = function() {
-				//	Create your Phaser game and inject it into the gameContainer div.
 				var game = new Phaser.Game(400, 500, Phaser.AUTO, 'gameContainer');
 
 				//	Add the States your game has.

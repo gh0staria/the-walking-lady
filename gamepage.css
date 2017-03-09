@@ -1,0 +1,17 @@
+body {
+ 	background: #fdfdfd;
+	font-family: 'Montserrat', sans-serif;
+}
+.row {
+    margin-top: 30px;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bitter', serif;
+	color: #277a32;
+}
+canvas {
+	margin: 0 auto;
+}
+a {
+    color: #277a32;
+}
